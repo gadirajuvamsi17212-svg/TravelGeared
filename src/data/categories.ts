@@ -1,0 +1,65 @@
+import { Category } from '../types';
+
+export const CATEGORIES: Category[] = [
+  {
+    id: 'cat-backpacks',
+    name: 'Travel Backpacks',
+    slug: 'travel-backpacks',
+    description: 'Ergonomically engineered carry-on bags and tactical packs for seamless transitions.',
+    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCz1rbTJKt3_AxCkNJ_NK0PF0Ir2OLdso9QQxpCKQhwNrrOXaJenF7ihxlwzbAsCiAh_EjIyWE0kPzGRysNPdP_nqdsCchGdis276uPlzoi0J6i23mUJ6cZ5MmLG6QIVlgWeqVMckRAgUMS5kr1qzeU8nkmfHtV-xykrNlpynwjkF637hecvI33v_Iv9A7dnRxKBYw8j86pdKNkYVbGJ0m4wIsItlzfSant0uxagfI_wiL73iUyHge_2g',
+    itemCount: 24,
+    featured: true,
+    gridSpan: {
+      colSpan: 'md:col-span-2',
+      rowSpan: 'md:row-span-2',
+    },
+  },
+  {
+    id: 'cat-luggage',
+    name: 'Luggage & Carry-Ons',
+    slug: 'luggage-carry-ons',
+    description: 'Precision polycarbonate and aircraft-grade aluminum luggage engineered for durability.',
+    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBEhuji4iTj31MAN8-pU5JJn7Z4pRNrnV_5KdiJB4hDm7BcVsFPoCKMmYQGDZAyeoZH4uZ7A9Bd4xtFPStUhARD4eIQmtEGIg35TeWDzMKnWqpmsBTOws4k-hKeLG9Av4pl7wUPPcAtBbEVHHqdc5KH3qC9qb5P1XyW-zDcTiui-t3ed5iCqWWhVfErWGUEuP-o60E88sVmCC7k3a2ydbUSzcX9HBJi6hQ8QxCpFyws1fg_oNSHMo33dg',
+    itemCount: 18,
+    featured: true,
+  },
+  {
+    id: 'cat-organizers',
+    name: 'Travel Organizers',
+    slug: 'travel-organizers',
+    description: 'Modular compression cubes, tech pouches, and weatherproof dopp kits.',
+    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuC6Bfyha-Pzs4XUHxYP4ytRlPSYxpFPJmxhe_4fW8-3LE3UIolLgUnKxj2fBiLrRY3b7gktjJaCn-h2qn_8xjOsv0flnwh8gtF8LSfPDaiCcx4NJTLo2AeeYq2Zqtl1qJGttcW8y5l2FBWNz6ooyuLQ-_U-uq2VI6ikvZNkb-0dTCCf4CoDfTe2bzG4JZLnLcZuN35F1CoDH3lkJgHyUTejiDQ-GAPrmARnWG2qlC_VWRhlSNCWsTX5wQ',
+    itemCount: 32,
+    featured: true,
+  },
+  {
+    id: 'cat-tech',
+    name: 'Travel Tech & Gadgets',
+    slug: 'travel-tech-gadgets',
+    description: 'Active noise cancelling headphones, portable displays, and travel accessories.',
+    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAf_ctcpCwAU52PUjrqscuAfi6eFQhSAGhqsUj5sOs11ZJZV03LVi8A9q6byfs8OgETjUYBH1IQqNKzgtgTTCFJi3L9aXDElZ12XBsIBK2t07UZt-qx7OLL4Za0duCKUqqMg9RQ0U6iUaH8a0VegLG9aB4KoXKveR_3fwUbK8Yw_m1UcPPzJ3VGBNeJ21SQKeNTFwh3Rv_yanuQAtZe-dRZOowqc_bcoGVkQDEbtTQfqB0KbpmwIn5zhA',
+    itemCount: 29,
+    featured: true,
+    gridSpan: {
+      colSpan: 'md:col-span-2',
+    },
+  },
+  {
+    id: 'cat-power',
+    name: 'Power & Charging',
+    slug: 'power-charging',
+    description: 'Universal GaN fast chargers, international adapters, and high-capacity power banks.',
+    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDhfKQiU9F5WArRf9SRVASIaaOjwK5rAvqQ45J4E05PRepBbM91Joy66G334tGySz-pm-hkNhOb2-CKoFUIlHc8PHSZYIGM1QA31NtdjgO9noYUXkenxbcqpaEUTG9NhpPXJ8GIlu715y9-JdH5qfpyC6TwNGHgKfec63P6u7aTfRMf6p74Prz30GIeEM_FWdYNkwp1lSa9oe4uVtsSIjGTRBPRhkfQlp6vKiX2DgS7TkHqu5iZxKbsFg',
+    itemCount: 16,
+    featured: true,
+  },
+  {
+    id: 'cat-comfort',
+    name: 'Travel Comfort',
+    slug: 'travel-comfort',
+    description: 'Ergonomic neck support, blackout sleep masks, and in-flight wellness essentials.',
+    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCbaYw0BjkE2gsvYH5rkkbbq8CCiNx4aM3-EXlQ_GojsyoRbiyoglYBm65SdBNUCltDISYIT-4LifeYEdeWOwTmCmWYaDkPS9Gz1SKhiMg4ZVYCyiHwqOW8_n4e-BXDHjgok6rMgfc10lJtXgY3A_r-Qilj0M0cbqtdzlRnBKvhyZNKCSM3HSub5ZWiKw6gHrQFqD2vwsUF9i6nlpjJeo2vYa-Gz_Lk-VoK1J_LMjqekRbFXpszNIYOeg',
+    itemCount: 22,
+    featured: true,
+  },
+];
