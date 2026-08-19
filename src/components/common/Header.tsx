@@ -65,11 +65,8 @@ export const Header: React.FC<HeaderProps> = ({
         document.getElementById('shop')?.scrollIntoView({ behavior: 'smooth' });
       }
     } else if (href === '#guides' || href === '/buying-guides') {
-      if (currentRoute !== 'home') {
-        onNavigate('guides');
-      } else {
-        document.getElementById('guides')?.scrollIntoView({ behavior: 'smooth' });
-      }
+      onNavigate('guides');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     } else if (href === '/reviews') {
       onNavigate('reviews');
     } else if (href === '/blog') {

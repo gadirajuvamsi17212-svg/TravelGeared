@@ -16,6 +16,7 @@ import { BlogPage } from './components/pages/BlogPage';
 import { AboutPage } from './components/pages/AboutPage';
 import { ContactPage } from './components/pages/ContactPage';
 import { LegalPage } from './components/pages/LegalPage';
+import { ComingSoonPage } from './components/pages/ComingSoonPage';
 import { Product, Article, Category, PageRoute } from './types';
 import { PRODUCTS } from './data/products';
 import { SITE_CONFIG } from './data/siteConfig';
@@ -125,21 +126,8 @@ export default function App() {
           </>
         )}
 
-        {currentRoute === 'category' && (
-          <CategoryPage
-            categorySlug={routeParam}
-            onSelectProduct={(p) => setSelectedProduct(p)}
-            onNavigate={handleNavigate}
-            savedProductIds={savedProductIds}
-            onToggleSave={toggleSaveProduct}
-          />
-        )}
-
-        {(currentRoute === 'guides' || currentRoute === 'reviews') && (
-          <GuidesPage
-            onSelectArticle={(art) => setSelectedArticle(art)}
-            onNavigate={handleNavigate}
-          />
+        {(currentRoute === 'category' || currentRoute === 'guides' || currentRoute === 'reviews' || currentRoute === 'coming-soon') && (
+          <ComingSoonPage onNavigate={handleNavigate} />
         )}
 
         {currentRoute === 'blog' && (

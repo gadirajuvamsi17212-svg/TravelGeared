@@ -83,4 +83,5 @@ export type PageRoute =
   | 'about'
   | 'contact'
   | 'privacy'
-  | 'terms';
+  | 'terms'
+  | 'coming-soon';
