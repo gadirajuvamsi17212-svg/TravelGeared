@@ -1,27 +1,15 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { CATEGORIES } from '../../data/categories';
-import { Category, PageRoute } from '../../types';
+import { Category } from '../../types';
 
 interface CategoriesBentoProps {
   onSelectCategory?: (category: Category) => void;
-  onNavigate?: (route: PageRoute, slug?: string) => void;
 }
 
 export const CategoriesBento: React.FC<CategoriesBentoProps> = ({
   onSelectCategory,
-  onNavigate,
 }) => {
-  const handleCategoryClick = (category: Category, e: React.MouseEvent) => {
-    e.preventDefault();
-    if (onSelectCategory) {
-      onSelectCategory(category);
-    }
-    if (onNavigate) {
-      onNavigate('category', category.slug);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-  };
-
   return (
     <section className="w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-12 lg:px-16 py-12 md:py-20 lg:py-24" id="shop">
       {/* Section Header */}
@@ -41,12 +29,16 @@ export const CategoriesBento: React.FC<CategoriesBentoProps> = ({
           const rowSpan = cat.gridSpan?.rowSpan || '';
           
           return (
-            <a
+            <Link
               key={cat.id}
               id={`category-card-${cat.slug}`}
               className={`group relative ${colSpan} ${rowSpan} rounded-xl overflow-hidden border border-[#ccc3d7] hover-lift bg-white cursor-pointer block shadow-xs`}
-              href={`/category/${cat.slug}`}
-              onClick={(e) => handleCategoryClick(cat, e)}
+              to={`/category/${cat.slug}`}
+              onClick={() => {
+                if (onSelectCategory) {
+                  onSelectCategory(cat);
+                }
+              }}
               aria-label={`Shop ${cat.name} Category`}
             >
               <div className="h-full flex flex-col w-full">
@@ -64,7 +56,7 @@ export const CategoriesBento: React.FC<CategoriesBentoProps> = ({
                   </h3>
                 </div>
               </div>
-            </a>
+            </Link>
           );
         })}
       </div>

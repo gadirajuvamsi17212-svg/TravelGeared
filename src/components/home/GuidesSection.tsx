@@ -42,9 +42,20 @@ export const GuidesSection: React.FC<GuidesSectionProps> = ({
               }}
             >
               {/* Background Image */}
-              <div
-                className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
-                style={{ backgroundImage: `url('${article.image}')` }}
+              <img
+                src={article.image}
+                alt={article.title}
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                loading="eager"
+                decoding="async"
+                onError={(e) => {
+                  const target = e.currentTarget;
+                  if (article.id === 'art-tech-organizers') {
+                    target.src = 'https://lh3.googleusercontent.com/aida-public/AB6AXuCTmIF9yEPMuZ8M4ReWgUABOYB5p4Ljz9pZdFHidgG5kmf3R-xtAMVxW5zW6tTJjhjhX07pZVt2tb_QJWWKBgNjgQfmfHWGNyBUZq4vHs3_sfEwkfB-E1_eChVq6WJfV9r2UoUSwRbyWXUozt7mBQccQzhY2AiR226vjuP-t1lwSbs-Co4DvoGcuscgCQB0ZJMy8xERO7UJNB_1kXowcjFP8hhVXRv6ISTBOTaYeJAU0NueJ8bbRZJKyw';
+                  } else if (article.id === 'art-one-bag-life') {
+                    target.src = 'https://lh3.googleusercontent.com/aida-public/AB6AXuAm99hPX7pBgs3XKZjyyGD6AfjL0p0TXKUr-jC2bkFc8Iyp4K2I1UG_L_H1gVVT4ItAG5tJBjX07up-HOgt8l2cdbOhhuxh0LJaWVWPSfG2WPZjKH5LDE52wkWodoykxvvDs4P36nC8nJw5fm3_xKthYLau-qlcnoOyBtykWV1nBUF3VQ4cogKEHcC7ITJnU0-9GQn6sHmq9JRldDN6Gf9pEMkqXTCVJmKi6CJlDrJ3kAyak6WzCFNBqg';
+                  }
+                }}
               />
               
               {/* Subtle Dark Gradient Overlay from bottom upward */}

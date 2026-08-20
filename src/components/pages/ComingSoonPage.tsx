@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import { PageRoute } from '../../types';
+import { Link } from 'react-router-dom';
 
 interface ComingSoonPageProps {
-  onNavigate: (route: PageRoute) => void;
   contextTitle?: string;
 }
 
-export const ComingSoonPage: React.FC<ComingSoonPageProps> = ({ onNavigate, contextTitle }) => {
+export const ComingSoonPage: React.FC<ComingSoonPageProps> = ({ contextTitle }) => {
   const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
 
@@ -86,13 +85,13 @@ export const ComingSoonPage: React.FC<ComingSoonPageProps> = ({ onNavigate, cont
 
             {/* Quick Return to Home Link */}
             <div className="pt-2">
-              <button
-                onClick={() => onNavigate('home')}
+              <Link
+                to="/"
                 className="inline-flex items-center gap-1.5 text-xs font-label-mono uppercase tracking-wider text-[#7b7486] hover:text-[#8E55FD] transition-colors cursor-pointer"
               >
                 <span className="material-symbols-outlined text-sm">arrow_back</span>
                 Return to Home
-              </button>
+              </Link>
             </div>
           </div>
 

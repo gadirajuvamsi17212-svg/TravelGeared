@@ -1,18 +1,15 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { BLOG_ARTICLES, BlogArticle } from '../../data/blogArticles';
-import { Article, PageRoute } from '../../types';
+import { Article } from '../../types';
 
 interface BlogPageProps {
   onSelectArticle: (article: Article) => void;
-  onNavigate: (route: PageRoute, param?: string) => void;
 }
 
 type FilterCategory = 'ALL' | 'TRAVEL TIPS' | 'PACKING' | 'TRAVEL TECH' | 'TRAVEL COMFORT';
 
-export const BlogPage: React.FC<BlogPageProps> = ({
-  onSelectArticle,
-  onNavigate,
-}) => {
+export const BlogPage: React.FC<BlogPageProps> = ({ onSelectArticle }) => {
   const [selectedCategory, setSelectedCategory] = useState<FilterCategory>('ALL');
   const [subscribed, setSubscribed] = useState(false);
   const [email, setEmail] = useState('');
@@ -50,164 +47,173 @@ export const BlogPage: React.FC<BlogPageProps> = ({
       {/* Breadcrumb Bar */}
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-12 lg:px-16 pt-6 pb-2">
         <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs font-label-mono text-[#7b7486]">
-          <button
-            onClick={() => onNavigate('home')}
+          <Link
+            to="/"
             className="hover:text-[#8E55FD] transition-colors cursor-pointer"
           >
             Home
-          </button>
+          </Link>
           <span>/</span>
           <span className="text-[#1a1c1e] font-semibold">Blog</span>
         </nav>
       </div>
 
-      <main className="w-full">
-        {/* Hero Section */}
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 lg:px-16 pt-8 pb-10 md:pt-12 md:pb-14 text-center">
-          <h1 className="font-headline-lg text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-[#1a1c1e] mb-4 tracking-[-0.02em] leading-tight">
-            Master the Art of the Journey
+      {/* Main Content Container */}
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-12 lg:px-16 py-8 md:py-12">
+        {/* Page Header */}
+        <div className="text-center max-w-3xl mx-auto mb-10 md:mb-14">
+          <h1 className="font-headline-lg font-bold text-3xl sm:text-4xl md:text-5xl text-[#8E55FD] mb-4 tracking-[-0.02em]">
+            Travel Insights &amp; Gear Guides
           </h1>
-          <p className="font-body-md text-base sm:text-lg md:text-xl text-[#4a4455] max-w-3xl mx-auto leading-relaxed">
-            Expert packing strategies, technical gear analysis, and practical wisdom designed to help the modern nomad travel smarter, lighter, and with absolute confidence.
+          <p className="font-body-md text-base sm:text-lg text-[#4a4455] leading-relaxed">
+            Expert travel tips, gear breakdowns, packing strategies, and lifestyle advice to help you travel smarter.
           </p>
-        </section>
+        </div>
 
-        {/* Filter Pills */}
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 lg:px-16 mb-10 md:mb-14">
-          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3">
-            {filterCategories.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setSelectedCategory(cat)}
-                className={`px-5 py-2 rounded-full font-label-mono text-xs uppercase tracking-wider font-medium transition-all duration-200 cursor-pointer ${
-                  selectedCategory === cat
-                    ? 'bg-[#8E55FD] text-white shadow-sm'
-                    : 'bg-[#f4f3f6] text-[#4a4455] hover:bg-[#eeedf0] hover:text-[#1a1c1e] border border-[#ccc3d7]'
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
-        </section>
-
-        {/* Featured Article (Shown when ALL or TRAVEL TIPS is selected) */}
-        {(selectedCategory === 'ALL' || selectedCategory === 'TRAVEL TIPS') && (
-          <section className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 lg:px-16 mb-12 md:mb-16">
-            <article
-              id={`featured-article-${featuredArticle.slug}`}
-              onClick={() => onSelectArticle(featuredArticle)}
-              className="group relative rounded-xl overflow-hidden border border-[#e8e8eb] bg-white hover-lift flex flex-col md:flex-row cursor-pointer shadow-xs"
+        {/* Filter Category Chips */}
+        <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-10 md:mb-14">
+          {filterCategories.map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setSelectedCategory(cat)}
+              className={`px-4 sm:px-5 py-2 rounded font-label-mono text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer ${
+                selectedCategory === cat
+                  ? 'bg-[#8E55FD] text-white shadow-xs'
+                  : 'bg-white text-[#4a4455] border border-[#ccc3d7] hover:bg-[#eaddff]/40 hover:text-[#8E55FD]'
+              }`}
             >
-              <div className="w-full md:w-3/5 h-64 md:h-[420px] relative overflow-hidden bg-black/5">
+              {cat}
+            </button>
+          ))}
+        </div>
+
+        {/* Featured Hero Article (Visible when ALL is selected) */}
+        {selectedCategory === 'ALL' && featuredArticle && (
+          <div className="mb-12 md:mb-16">
+            <div
+              onClick={() => onSelectArticle(featuredArticle)}
+              className="group bg-white rounded-xl border border-[#ccc3d7] overflow-hidden hover:border-[#8E55FD] hover-lift transition-all duration-300 grid grid-cols-1 lg:grid-cols-12 cursor-pointer shadow-sm"
+            >
+              <div className="lg:col-span-7 h-64 sm:h-80 lg:h-[420px] overflow-hidden relative">
                 <img
-                  alt={featuredArticle.title}
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   src={featuredArticle.image}
+                  alt={featuredArticle.title}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 select-none"
                   loading="eager"
                   decoding="async"
                 />
+                <div className="absolute top-4 left-4">
+                  <span className="font-label-mono text-xs font-bold uppercase bg-[#8E55FD] text-white px-3 py-1 rounded shadow-xs">
+                    Featured
+                  </span>
+                </div>
               </div>
-              <div className="w-full md:w-2/5 p-6 sm:p-8 md:p-10 flex flex-col justify-center">
-                <span className="inline-block px-3 py-1 bg-[#eaddff] text-[#8E55FD] font-label-mono text-xs font-semibold uppercase rounded w-fit mb-3 tracking-wider">
-                  {featuredArticle.tag}
-                </span>
-                <h2 className="font-headline-lg text-2xl sm:text-3xl lg:text-[34px] lg:leading-[42px] font-bold text-[#1a1c1e] mb-3 group-hover:text-[#8E55FD] transition-colors leading-tight">
-                  {featuredArticle.title}
-                </h2>
-                <p className="font-body-md text-sm sm:text-base text-[#4a4455] mb-6 line-clamp-3 leading-relaxed">
-                  {featuredArticle.excerpt}
-                </p>
-                <div className="inline-flex items-center text-[#8E55FD] font-title-md font-semibold text-sm group-hover:text-[#7232E7] transition-colors w-fit gap-1.5">
-                  Read Article
-                  <span className="material-symbols-outlined text-[18px] group-hover:translate-x-1 transition-transform">
+              <div className="lg:col-span-5 p-6 sm:p-8 lg:p-10 flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center gap-3 text-xs font-label-mono text-[#7b7486] mb-3">
+                    <span>{featuredArticle.publishDate}</span>
+                    <span>•</span>
+                    <span>{featuredArticle.readTime}</span>
+                  </div>
+                  <h2 className="font-headline-lg font-bold text-2xl sm:text-3xl text-[#1a1c1e] group-hover:text-[#8E55FD] transition-colors mb-4 leading-snug">
+                    {featuredArticle.title}
+                  </h2>
+                  <p className="font-body-md text-sm sm:text-base text-[#4a4455] leading-relaxed mb-6">
+                    {featuredArticle.excerpt}
+                  </p>
+                </div>
+                <div className="inline-flex items-center gap-2 font-label-mono text-xs font-bold uppercase tracking-wider text-[#8E55FD] group-hover:text-[#7232E7] transition-colors">
+                  Read Full Article
+                  <span className="material-symbols-outlined text-base icon-slide-right">
                     arrow_forward
                   </span>
                 </div>
               </div>
-            </article>
-          </section>
+            </div>
+          </div>
         )}
 
-        {/* Latest Articles Grid */}
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 lg:px-16 mb-16 md:mb-24">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-            {gridArticles.map((article) => (
-              <article
-                key={article.id}
-                id={`article-card-${article.slug}`}
-                onClick={() => onSelectArticle(article)}
-                className="group rounded-xl border border-[#e8e8eb] bg-white overflow-hidden hover-lift flex flex-col cursor-pointer shadow-xs"
-              >
-                <div className="relative h-48 sm:h-52 overflow-hidden bg-black/5">
-                  <img
-                    alt={article.title}
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    src={article.image}
-                    loading="lazy"
-                    decoding="async"
-                  />
+        {/* Articles Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-16">
+          {gridArticles.map((article) => (
+            <div
+              key={article.id}
+              onClick={() => onSelectArticle(article)}
+              className="group bg-white rounded-xl border border-[#ccc3d7] overflow-hidden hover:border-[#8E55FD] hover-lift transition-all duration-300 flex flex-col justify-between cursor-pointer shadow-xs"
+            >
+              <div className="h-48 sm:h-52 overflow-hidden relative">
+                <img
+                  src={article.image}
+                  alt={article.title}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 select-none"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <div className="absolute top-3 left-3">
+                  <span className="font-label-mono text-[11px] font-bold uppercase bg-white/90 backdrop-blur-xs text-[#8E55FD] px-2.5 py-0.5 rounded shadow-2xs">
+                    {article.filterCategory}
+                  </span>
                 </div>
-                <div className="p-6 flex flex-col flex-grow justify-between">
-                  <div>
-                    <span className="inline-block px-2.5 py-1 bg-[#eaddff] text-[#8E55FD] font-label-mono text-xs font-semibold uppercase rounded w-fit mb-3 tracking-wider">
-                      {article.tag}
-                    </span>
-                    <h3 className="font-title-md text-lg sm:text-xl font-bold text-[#1a1c1e] mb-2.5 group-hover:text-[#8E55FD] transition-colors line-clamp-2 leading-snug">
-                      {article.title}
-                    </h3>
-                    <p className="font-body-md text-sm text-[#4a4455] mb-4 line-clamp-2 leading-relaxed">
-                      {article.excerpt}
-                    </p>
+              </div>
+              <div className="p-6 flex-1 flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center gap-2 text-[11px] font-label-mono text-[#7b7486] mb-2.5">
+                    <span>{article.publishDate}</span>
+                    <span>•</span>
+                    <span>{article.readTime}</span>
                   </div>
-                  <div className="text-[#8E55FD] font-body-md text-sm font-semibold group-hover:text-[#7232E7] transition-colors mt-auto inline-flex items-center gap-1">
-                    Read more
-                    <span className="material-symbols-outlined text-[16px] group-hover:translate-x-1 transition-transform">
-                      arrow_forward
-                    </span>
-                  </div>
+                  <h3 className="font-title-md font-bold text-lg text-[#1a1c1e] group-hover:text-[#8E55FD] transition-colors mb-2.5 leading-snug line-clamp-2">
+                    {article.title}
+                  </h3>
+                  <p className="font-body-md text-xs sm:text-sm text-[#4a4455] leading-relaxed line-clamp-3 mb-4">
+                    {article.excerpt}
+                  </p>
                 </div>
-              </article>
-            ))}
-          </div>
-        </section>
+                <div className="inline-flex items-center gap-1.5 font-label-mono text-xs font-bold uppercase tracking-wider text-[#8E55FD] group-hover:text-[#7232E7] transition-colors pt-2 border-t border-[#eeedf0]">
+                  Read Guide
+                  <span className="material-symbols-outlined text-sm icon-slide-right">
+                    arrow_forward
+                  </span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
 
-        {/* Explore Section */}
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 lg:px-16 mb-16 md:mb-24">
-          <div className="border-t border-[#e8e8eb] pt-12 md:pt-16 text-center">
-            <h3 className="font-headline-lg text-2xl sm:text-3xl font-bold text-[#1a1c1e] mb-8">
-              Explore TravelGeared
-            </h3>
+        {/* Explore More Travel Topics */}
+        <section className="bg-white rounded-2xl border border-[#ccc3d7] p-8 md:p-12 mb-16 text-center shadow-xs">
+          <div className="max-w-2xl mx-auto">
+            <h2 className="font-headline-lg font-bold text-2xl sm:text-3xl text-[#8E55FD] mb-3">
+              Explore More Travel Topics
+            </h2>
+            <p className="font-body-md text-sm sm:text-base text-[#4a4455] mb-8 leading-relaxed">
+              Dive deeper into our specific categories and curated buying guides to discover gear tailored for your journey.
+            </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <button
-                onClick={() => {
-                  onNavigate('home');
-                  setTimeout(() => {
-                    document.getElementById('shop')?.scrollIntoView({ behavior: 'smooth' });
-                  }, 100);
-                }}
-                className="px-6 py-3 border border-[#ccc3d7] rounded hover:bg-[#e8e8eb] transition-colors font-title-md text-sm font-semibold text-[#1a1c1e] cursor-pointer"
+              <Link
+                to="/#shop"
+                className="px-6 py-3 border border-[#ccc3d7] rounded hover:bg-[#e8e8eb] transition-colors font-title-md text-sm font-semibold text-[#1a1c1e] cursor-pointer inline-flex items-center"
               >
                 Travel Gear
-              </button>
-              <button
-                onClick={() => onNavigate('guides')}
-                className="px-6 py-3 border border-[#ccc3d7] rounded hover:bg-[#e8e8eb] transition-colors font-title-md text-sm font-semibold text-[#1a1c1e] cursor-pointer"
+              </Link>
+              <Link
+                to="/buying-guides"
+                className="px-6 py-3 border border-[#ccc3d7] rounded hover:bg-[#e8e8eb] transition-colors font-title-md text-sm font-semibold text-[#1a1c1e] cursor-pointer inline-flex items-center"
               >
                 Buying Guides
-              </button>
-              <button
-                onClick={() => onNavigate('reviews')}
-                className="px-6 py-3 border border-[#ccc3d7] rounded hover:bg-[#e8e8eb] transition-colors font-title-md text-sm font-semibold text-[#1a1c1e] cursor-pointer"
+              </Link>
+              <Link
+                to="/reviews"
+                className="px-6 py-3 border border-[#ccc3d7] rounded hover:bg-[#e8e8eb] transition-colors font-title-md text-sm font-semibold text-[#1a1c1e] cursor-pointer inline-flex items-center"
               >
                 Reviews
-              </button>
+              </Link>
             </div>
           </div>
         </section>
 
         {/* Subscription CTA */}
-        <section className="bg-[#8E55FD] py-16 md:py-20 px-4 sm:px-6 md:px-12 lg:px-16 text-center text-white select-none">
+        <section className="bg-[#8E55FD] py-16 md:py-20 px-4 sm:px-6 md:px-12 lg:px-16 text-center text-white select-none rounded-2xl shadow-md">
           <div className="max-w-3xl mx-auto">
             <span className="material-symbols-outlined text-4xl sm:text-5xl mb-4 text-white">
               mail
@@ -224,18 +230,18 @@ export const BlogPage: React.FC<BlogPageProps> = ({
                 Thank you for subscribing!
               </div>
             ) : (
-              <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-3 justify-center max-w-md mx-auto">
+              <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
                 <input
                   type="email"
                   required
-                  placeholder="Enter your email address"
+                  placeholder="Enter your email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="flex-1 px-4 py-3 rounded bg-white/15 text-white placeholder:text-white/70 focus:ring-2 focus:ring-white focus:bg-white/25 font-body-md text-sm outline-none transition-all border border-white/20"
+                  className="flex-1 px-4 py-3 rounded-lg bg-white text-[#1a1c1e] placeholder:text-[#7b7486] font-body-md text-sm focus:outline-none focus:ring-2 focus:ring-white/50"
                 />
                 <button
                   type="submit"
-                  className="px-6 py-3 bg-[#141223] text-white font-title-md text-sm font-semibold rounded hover:bg-white hover:text-[#141223] transition-colors whitespace-nowrap cursor-pointer shadow-sm"
+                  className="px-6 py-3 bg-white text-[#8E55FD] hover:bg-[#faf9fc] font-title-md text-sm font-bold rounded-lg transition-all shadow-md active:scale-95 cursor-pointer whitespace-nowrap"
                 >
                   Subscribe
                 </button>
@@ -243,7 +249,7 @@ export const BlogPage: React.FC<BlogPageProps> = ({
             )}
           </div>
         </section>
-      </main>
+      </div>
     </div>
   );
 };

@@ -1,50 +1,43 @@
 import React from 'react';
-import { PageRoute } from '../../types';
+import { Link } from 'react-router-dom';
 
-interface AboutPageProps {
-  onNavigate: (route: PageRoute, param?: string) => void;
-}
-
-export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
+export const AboutPage: React.FC = () => {
   const whatWeCoverItems = [
     {
       title: 'Travel Backpacks',
       description: 'From minimalist daypacks to robust expedition haulers.',
       icon: 'backpack',
-      route: 'category' as PageRoute,
-      param: 'travel-backpacks',
+      to: '/category/travel-backpacks',
     },
     {
       title: 'Travel Tech & Gadgets',
       description: 'Power banks, adapters, and tools to keep you connected.',
       icon: 'devices',
-      route: 'category' as PageRoute,
-      param: 'travel-tech-gadgets',
+      to: '/category/travel-tech-gadgets',
     },
     {
       title: 'Travel Comfort',
       description: 'Pillows, blankets, and accessories for the long haul.',
       icon: 'chair',
-      route: 'category' as PageRoute,
-      param: 'travel-comfort',
+      to: '/category/travel-comfort',
     },
     {
       title: 'Buying Guides',
       description: 'Comprehensive breakdowns to help you choose right.',
       icon: 'menu_book',
-      route: 'guides' as PageRoute,
+      to: '/buying-guides',
     },
     {
       title: 'In-Depth Reviews',
       description: 'Unbiased testing of the latest gear on the market.',
       icon: 'star',
-      route: 'reviews' as PageRoute,
+      to: '/reviews',
     },
     {
       title: 'The Travel Journal',
       description: 'Stories, tips, and inspiration from the road.',
       icon: 'edit_document',
-      route: 'blog' as PageRoute,
+      to: '/blog',
     },
   ];
 
@@ -53,12 +46,12 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
       {/* Breadcrumb Bar */}
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-12 lg:px-16 pt-6 pb-2">
         <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs font-label-mono text-[#7b7486]">
-          <button
-            onClick={() => onNavigate('home')}
+          <Link
+            to="/"
             className="hover:text-[#8E55FD] transition-colors cursor-pointer"
           >
             Home
-          </button>
+          </Link>
           <span>/</span>
           <span className="text-[#1a1c1e] font-semibold">About Us</span>
         </nav>
@@ -103,18 +96,11 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {whatWeCoverItems.map((item, idx) => (
-              <div
+              <Link
                 key={idx}
                 id={`cover-category-${idx}`}
-                onClick={() => {
-                  if (item.route === 'category' && item.param) {
-                    onNavigate('category', item.param);
-                  } else {
-                    onNavigate(item.route);
-                  }
-                  window.scrollTo({ top: 0, behavior: 'smooth' });
-                }}
-                className="bg-white p-6 sm:p-7 rounded-xl border border-[#ccc3d7] hover:border-[#8E55FD] hover:bg-[#eaddff]/30 transition-all duration-200 group cursor-pointer shadow-xs hover:shadow-md hover-lift"
+                to={item.to}
+                className="bg-white p-6 sm:p-7 rounded-xl border border-[#ccc3d7] hover:border-[#8E55FD] hover:bg-[#eaddff]/30 transition-all duration-200 group cursor-pointer shadow-xs hover:shadow-md hover-lift block"
               >
                 <div className="w-12 h-12 rounded-full bg-[#8E55FD] flex items-center justify-center mb-4 text-white group-hover:scale-105 transition-transform">
                   <span className="material-symbols-outlined text-white text-2xl">
@@ -127,7 +113,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
                 <p className="font-body-md text-sm text-[#4a4455] leading-relaxed">
                   {item.description}
                 </p>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
@@ -199,18 +185,13 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
           <h2 className="font-headline-lg font-bold text-2xl sm:text-3xl md:text-[32px] text-[#8E55FD] mb-6">
             Gear Up for Your Next Journey
           </h2>
-          <button
+          <Link
             id="about-explore-gear-cta"
-            onClick={() => {
-              onNavigate('home');
-              setTimeout(() => {
-                document.getElementById('shop')?.scrollIntoView({ behavior: 'smooth' });
-              }, 100);
-            }}
+            to="/#shop"
             className="inline-flex items-center justify-center bg-[#8E55FD] text-white px-8 py-3.5 rounded font-label-mono text-sm uppercase tracking-wider hover:bg-[#7232E7] transition-all shadow-md active:scale-95 btn-lift cursor-pointer"
           >
             Explore Travel Gear
-          </button>
+          </Link>
         </div>
       </section>
     </div>

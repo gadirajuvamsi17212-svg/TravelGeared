@@ -1,11 +1,7 @@
 import React, { useState } from 'react';
-import { PageRoute } from '../../types';
+import { Link } from 'react-router-dom';
 
-interface ContactPageProps {
-  onNavigate: (route: PageRoute) => void;
-}
-
-export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
+export const ContactPage: React.FC = () => {
   const [submitted, setSubmitted] = useState(false);
   const [formData, setFormData] = useState({
     firstName: '',
@@ -38,12 +34,12 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 lg:px-16 py-8 md:py-12">
         {/* Breadcrumbs */}
         <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs font-label-mono text-[#7b7486] mb-6">
-          <button
-            onClick={() => onNavigate('home')}
+          <Link
+            to="/"
             className="hover:text-[#8E55FD] transition-colors cursor-pointer"
           >
             Home
-          </button>
+          </Link>
           <span>/</span>
           <span className="text-[#1a1c1e] font-semibold">Contact Us</span>
         </nav>

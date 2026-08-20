@@ -66,7 +66,6 @@ export const TopRatedGear: React.FC<TopRatedGearProps> = ({
             href="#shop"
             onClick={(e) => {
               e.preventDefault();
-              if (onNavigate) onNavigate('home');
               document.getElementById('shop')?.scrollIntoView({ behavior: 'smooth' });
             }}
           >

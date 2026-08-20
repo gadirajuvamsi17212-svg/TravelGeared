@@ -1,13 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { SITE_CONFIG } from '../../data/siteConfig';
 import { FOOTER_SECTIONS } from '../../data/navigation';
-import { PageRoute } from '../../types';
 
-interface FooterProps {
-  onNavigate: (route: PageRoute, param?: string) => void;
-}
-
-export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
+export const Footer: React.FC = () => {
   return (
     <footer
       id="site-footer"
@@ -18,15 +14,10 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-10 mb-12">
           {/* Brand Col */}
           <div className="sm:col-span-2 lg:col-span-2">
-            <a
+            <Link
               id="footer-brand-logo"
               className="inline-flex items-center cursor-pointer mb-6"
-              href="/"
-              onClick={(e) => {
-                e.preventDefault();
-                onNavigate('home');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-              }}
+              to="/"
               aria-label="TravelGeared Homepage"
             >
               <img
@@ -36,7 +27,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                 loading="lazy"
                 decoding="async"
               />
-            </a>
+            </Link>
             <p className="font-body-md text-[#e3e2e5] max-w-[340px] mb-6 opacity-80 leading-relaxed text-sm">
               {SITE_CONFIG.subTagline}
             </p>
@@ -91,18 +82,12 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             <ul className="space-y-3">
               {FOOTER_SECTIONS.travelGear.map((item, idx) => (
                 <li key={idx}>
-                  <a
+                  <Link
                     className="nav-link inline-block font-body-md text-[#e3e2e5] hover:text-[#8E55FD] transition-colors opacity-80 hover:opacity-100 text-sm"
-                    href={item.href}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      const slug = item.href.replace('/category/', '');
-                      onNavigate('category', slug);
-                      window.scrollTo({ top: 0, behavior: 'smooth' });
-                    }}
+                    to={item.href}
                   >
                     {item.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -114,20 +99,13 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             <ul className="space-y-3">
               {FOOTER_SECTIONS.explore.map((item, idx) => (
                 <li key={idx}>
-                  <a
+                  <Link
                     id={`footer-link-${item.label.toLowerCase().replace(/\s+/g, '-')}`}
                     className="nav-link inline-block font-body-md text-[#e3e2e5] hover:text-[#8E55FD] transition-colors opacity-80 hover:opacity-100 text-sm cursor-pointer"
-                    href={item.href}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      if (item.href === '/buying-guides') onNavigate('guides');
-                      else if (item.href === '/reviews') onNavigate('reviews');
-                      else if (item.href === '/blog') onNavigate('blog');
-                      window.scrollTo({ top: 0, behavior: 'smooth' });
-                    }}
+                    to={item.href}
                   >
                     {item.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -139,21 +117,13 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             <ul className="space-y-3">
               {FOOTER_SECTIONS.company.map((item, idx) => (
                 <li key={idx}>
-                  <a
+                  <Link
                     id={`footer-link-${item.label.toLowerCase().replace(/\s+/g, '-')}`}
                     className="nav-link inline-block font-body-md text-[#e3e2e5] hover:text-[#8E55FD] transition-colors opacity-80 hover:opacity-100 text-sm cursor-pointer"
-                    href={item.href}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      if (item.href === '/about') onNavigate('about');
-                      else if (item.href === '/contact') onNavigate('contact');
-                      else if (item.href === '/privacy-policy') onNavigate('privacy');
-                      else if (item.href === '/terms-of-service') onNavigate('terms');
-                      window.scrollTo({ top: 0, behavior: 'smooth' });
-                    }}
+                    to={item.href}
                   >
                     {item.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>

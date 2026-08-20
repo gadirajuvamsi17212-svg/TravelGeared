@@ -1,13 +1,12 @@
 import React from 'react';
-import { PageRoute } from '../../types';
+import { Link } from 'react-router-dom';
 import { AFFILIATE_DISCLOSURE_FULL } from '../../data/affiliate';
 
 interface LegalPageProps {
   type: 'privacy' | 'terms';
-  onNavigate: (route: PageRoute) => void;
 }
 
-export const LegalPage: React.FC<LegalPageProps> = ({ type, onNavigate }) => {
+export const LegalPage: React.FC<LegalPageProps> = ({ type }) => {
   const isPrivacy = type === 'privacy';
 
   return (
@@ -15,12 +14,12 @@ export const LegalPage: React.FC<LegalPageProps> = ({ type, onNavigate }) => {
       <div className="max-w-3xl mx-auto px-4 md:px-8">
         {/* Breadcrumb */}
         <div className="flex items-center gap-2 text-xs font-label-mono text-[#7b7486] mb-6">
-          <button
-            onClick={() => onNavigate('home')}
+          <Link
+            to="/"
             className="hover:text-[#8E55FD] transition-colors cursor-pointer"
           >
             Home
-          </button>
+          </Link>
           <span>/</span>
           <span className="text-[#1a1c1e] font-semibold">
             {isPrivacy ? 'Privacy Policy' : 'Terms of Service'}
@@ -32,7 +31,7 @@ export const LegalPage: React.FC<LegalPageProps> = ({ type, onNavigate }) => {
             {isPrivacy ? 'Privacy Policy' : 'Terms of Service & Affiliate Disclosure'}
           </h1>
           <p className="text-xs font-label-mono text-[#7b7486]">
-            Last updated: August 2024
+            Last updated: August 2026
           </p>
 
           <div className="prose text-[#4a4455] font-body-md text-sm leading-relaxed space-y-4">
@@ -58,21 +57,35 @@ export const LegalPage: React.FC<LegalPageProps> = ({ type, onNavigate }) => {
                 <p>
                   When you click retailer links on TravelGeared, merchant sites (including Amazon, REI, and manufacturer partners) may place affiliate tracking cookies on your device to attribute referral credits.
                 </p>
+
+                <h3 className="font-headline-lg font-bold text-lg text-[#1a1c1e] mt-6">
+                  3. Contact Us
+                </h3>
+                <p>
+                  If you have any questions regarding our privacy practices, please contact us at <a href="mailto:privacy@travelgeared.com" className="text-[#8E55FD] underline font-medium">privacy@travelgeared.com</a>.
+                </p>
               </>
             ) : (
               <>
                 <h3 className="font-headline-lg font-bold text-lg text-[#1a1c1e] mt-6">
-                  1. Use of Content
+                  1. Terms of Use
                 </h3>
                 <p>
-                  All reviews, editorial evaluations, photography, and guide frameworks published on TravelGeared are protected by international copyright laws. Unauthorized reproduction is strictly prohibited.
+                  By accessing TravelGeared, you agree to comply with our Terms of Service. All content, recommendations, and reviews are provided for informational and editorial guidance.
                 </p>
 
                 <h3 className="font-headline-lg font-bold text-lg text-[#1a1c1e] mt-6">
-                  2. Price &amp; Specification Accuracy
+                  2. Product Availability &amp; Pricing
                 </h3>
                 <p>
-                  While we endeavor to maintain real-time price accuracy, retailer prices and inventory availability fluctuate independently. Always verify final figures on the merchant&apos;s checkout page.
+                  Prices, specifications, and availability of products featured on TravelGeared are subject to change by respective retailers. We recommend verifying details directly on the merchant checkout page.
+                </p>
+
+                <h3 className="font-headline-lg font-bold text-lg text-[#1a1c1e] mt-6">
+                  3. Intellectual Property
+                </h3>
+                <p>
+                  All articles, comparisons, and custom photography on TravelGeared are copyrighted. Reproduction without written consent is strictly prohibited.
                 </p>
               </>
             )}

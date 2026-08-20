@@ -1,10 +1,8 @@
 import React, { useState, useRef } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { CATEGORIES } from '../../data/categories';
-import { PageRoute } from '../../types';
 
 interface HeaderProps {
-  currentRoute: PageRoute;
-  onNavigate: (route: PageRoute, param?: string) => void;
   onOpenSearch: () => void;
   onOpenAccount: () => void;
   savedCount?: number;
@@ -20,12 +18,14 @@ const CATEGORY_ICONS: Record<string, string> = {
 };
 
 export const Header: React.FC<HeaderProps> = ({
-  currentRoute,
-  onNavigate,
   onOpenSearch,
   onOpenAccount,
   savedCount = 0,
 }) => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const pathname = location.pathname;
+
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileGearOpen, setMobileGearOpen] = useState(true);
   const [gearDropdownOpen, setGearDropdownOpen] = useState(false);
@@ -44,52 +44,34 @@ export const Header: React.FC<HeaderProps> = ({
     }, 150);
   };
 
-  const handleCategorySelect = (slug: string, e: React.MouseEvent) => {
-    e.preventDefault();
+  const handleCategorySelect = (slug: string) => {
     setGearDropdownOpen(false);
     setMobileMenuOpen(false);
-    onNavigate('category', slug);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    navigate(`/category/${slug}`);
   };
 
-  const handleNavClick = (href: string, e: React.MouseEvent) => {
+  const handleShopScroll = (e: React.MouseEvent) => {
     e.preventDefault();
     setGearDropdownOpen(false);
-    if (href === '#shop') {
-      if (currentRoute !== 'home') {
-        onNavigate('home');
-        setTimeout(() => {
-          document.getElementById('shop')?.scrollIntoView({ behavior: 'smooth' });
-        }, 100);
-      } else {
-        document.getElementById('shop')?.scrollIntoView({ behavior: 'smooth' });
-      }
-    } else if (href === '#guides' || href === '/buying-guides') {
-      onNavigate('guides');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else if (href === '/reviews') {
-      onNavigate('reviews');
-    } else if (href === '/blog') {
-      onNavigate('blog');
-    } else if (href === '/') {
-      onNavigate('home');
-    }
     setMobileMenuOpen(false);
+    if (pathname !== '/') {
+      navigate('/#shop');
+    } else {
+      const el = document.getElementById('shop');
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
   };
 
   return (
     <header className="sticky top-0 z-50 bg-white border-b border-[#ccc3d7]">
       <div className="flex justify-between items-center w-full px-4 sm:px-6 md:px-12 lg:px-16 py-3.5 sm:py-4 max-w-7xl mx-auto">
         {/* Brand Logo */}
-        <a
+        <Link
           id="header-brand-logo"
           className="flex items-center shrink-0 cursor-pointer select-none"
-          href="/"
-          onClick={(e) => {
-            e.preventDefault();
-            onNavigate('home');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          }}
+          to="/"
           aria-label="TravelGeared Homepage"
         >
           <img
@@ -99,7 +81,7 @@ export const Header: React.FC<HeaderProps> = ({
             loading="eager"
             decoding="async"
           />
-        </a>
+        </Link>
 
         {/* Navigation Links (Desktop) */}
         <nav aria-label="Main Navigation" className="hidden md:flex items-center gap-6 lg:gap-8">
@@ -112,12 +94,12 @@ export const Header: React.FC<HeaderProps> = ({
             <a
               id="nav-link-travel-gear"
               className={`nav-link inline-flex items-center gap-1 hover:text-[#8E55FD] transition-colors font-body-md text-sm md:text-[15px] font-medium cursor-pointer py-2 ${
-                currentRoute === 'category' || currentRoute === 'home'
+                pathname.startsWith('/category') || pathname === '/'
                   ? 'text-[#1a1c1e]'
                   : 'text-[#4a4455]'
               }`}
-              href="#shop"
-              onClick={(e) => handleNavClick('#shop', e)}
+              href="/#shop"
+              onClick={handleShopScroll}
               aria-haspopup="true"
               aria-expanded={gearDropdownOpen}
             >
@@ -150,11 +132,14 @@ export const Header: React.FC<HeaderProps> = ({
                   {CATEGORIES.map((category) => {
                     const iconName = CATEGORY_ICONS[category.slug] || 'inventory_2';
                     return (
-                      <a
+                      <Link
                         key={category.id}
                         id={`dropdown-category-${category.slug}`}
-                        href={`/category/${category.slug}`}
-                        onClick={(e) => handleCategorySelect(category.slug, e)}
+                        to={`/category/${category.slug}`}
+                        onClick={() => {
+                          setGearDropdownOpen(false);
+                          setMobileMenuOpen(false);
+                        }}
                         className="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-[#faf9fc] hover:text-[#8E55FD] transition-colors group cursor-pointer"
                       >
                         <div className="w-8 h-8 rounded-md bg-[#f4f3f6] group-hover:bg-[#eaddff] flex items-center justify-center text-[#4a4455] group-hover:text-[#8E55FD] transition-colors shrink-0">
@@ -175,16 +160,16 @@ export const Header: React.FC<HeaderProps> = ({
                             {category.description}
                           </p>
                         </div>
-                      </a>
+                      </Link>
                     );
                   })}
                 </div>
 
                 <div className="mt-2 pt-2 border-t border-[#eeedf0] px-3 py-1.5 flex items-center justify-between bg-[#f4f3f6]/60 rounded-lg">
                   <a
-                    href="#shop"
-                    onClick={(e) => handleNavClick('#shop', e)}
-                    className="font-title-md text-xs text-[#8E55FD] font-semibold hover:text-[#7232E7] transition-colors inline-flex items-center gap-1"
+                    href="/#shop"
+                    onClick={handleShopScroll}
+                    className="font-title-md text-xs text-[#8E55FD] font-semibold hover:text-[#7232E7] transition-colors inline-flex items-center gap-1 cursor-pointer"
                   >
                     Browse All Categories Grid
                     <span className="material-symbols-outlined text-xs">arrow_forward</span>
@@ -194,38 +179,37 @@ export const Header: React.FC<HeaderProps> = ({
             )}
           </div>
 
-          <a
+          <Link
             id="nav-link-buying-guides"
             className={`nav-link hover:text-[#8E55FD] transition-colors font-body-md text-sm md:text-[15px] font-medium ${
-              currentRoute === 'guides' ? 'text-[#8E55FD] font-semibold' : 'text-[#4a4455]'
+              pathname === '/buying-guides' || pathname === '/guides'
+                ? 'text-[#8E55FD] font-semibold'
+                : 'text-[#4a4455]'
             }`}
-            href="#guides"
-            onClick={(e) => handleNavClick('#guides', e)}
+            to="/buying-guides"
           >
             Buying Guides
-          </a>
+          </Link>
 
-          <a
+          <Link
             id="nav-link-reviews"
             className={`nav-link hover:text-[#8E55FD] transition-colors font-body-md text-sm md:text-[15px] font-medium ${
-              currentRoute === 'reviews' ? 'text-[#8E55FD] font-semibold' : 'text-[#4a4455]'
+              pathname === '/reviews' ? 'text-[#8E55FD] font-semibold' : 'text-[#4a4455]'
             }`}
-            href="/reviews"
-            onClick={(e) => handleNavClick('/reviews', e)}
+            to="/reviews"
           >
             Reviews
-          </a>
+          </Link>
 
-          <a
+          <Link
             id="nav-link-blog"
             className={`nav-link hover:text-[#8E55FD] transition-colors font-body-md text-sm md:text-[15px] font-medium ${
-              currentRoute === 'blog' ? 'text-[#8E55FD] font-semibold' : 'text-[#4a4455]'
+              pathname === '/blog' ? 'text-[#8E55FD] font-semibold' : 'text-[#4a4455]'
             }`}
-            href="/blog"
-            onClick={(e) => handleNavClick('/blog', e)}
+            to="/blog"
           >
             Blog
-          </a>
+          </Link>
         </nav>
 
         {/* Trailing Actions */}
@@ -305,10 +289,10 @@ export const Header: React.FC<HeaderProps> = ({
                     {CATEGORIES.map((cat) => {
                       const iconName = CATEGORY_ICONS[cat.slug] || 'inventory_2';
                       return (
-                        <a
+                        <Link
                           key={cat.id}
-                          href={`/category/${cat.slug}`}
-                          onClick={(e) => handleCategorySelect(cat.slug, e)}
+                          to={`/category/${cat.slug}`}
+                          onClick={() => setMobileMenuOpen(false)}
                           className="flex items-center justify-between p-2 rounded hover:bg-[#eaddff]/40 text-sm font-medium text-[#1a1c1e] hover:text-[#8E55FD] transition-colors"
                         >
                           <div className="flex items-center gap-2">
@@ -320,34 +304,34 @@ export const Header: React.FC<HeaderProps> = ({
                           <span className="text-xs text-[#7b7486] font-label-mono">
                             {cat.itemCount}
                           </span>
-                        </a>
+                        </Link>
                       );
                     })}
                   </div>
                 )}
               </div>
 
-              <a
+              <Link
                 className="text-lg font-headline-lg font-semibold text-[#1a1c1e] hover:text-[#8E55FD] py-2 border-b border-[#eeedf0]"
-                href="#guides"
-                onClick={(e) => handleNavClick('#guides', e)}
+                to="/buying-guides"
+                onClick={() => setMobileMenuOpen(false)}
               >
                 Buying Guides
-              </a>
-              <a
+              </Link>
+              <Link
                 className="text-lg font-headline-lg font-semibold text-[#1a1c1e] hover:text-[#8E55FD] py-2 border-b border-[#eeedf0]"
-                href="/reviews"
-                onClick={(e) => handleNavClick('/reviews', e)}
+                to="/reviews"
+                onClick={() => setMobileMenuOpen(false)}
               >
                 Reviews
-              </a>
-              <a
+              </Link>
+              <Link
                 className="text-lg font-headline-lg font-semibold text-[#1a1c1e] hover:text-[#8E55FD] py-2 border-b border-[#eeedf0]"
-                href="/blog"
-                onClick={(e) => handleNavClick('/blog', e)}
+                to="/blog"
+                onClick={() => setMobileMenuOpen(false)}
               >
                 Blog
-              </a>
+              </Link>
             </div>
 
             <div className="pt-2 flex flex-col gap-2">

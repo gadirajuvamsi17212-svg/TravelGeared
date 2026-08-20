@@ -1,29 +1,23 @@
 import React, { useState, useEffect } from 'react';
+import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import { Header } from './components/common/Header';
 import { Footer } from './components/common/Footer';
-import { HeroSection } from './components/home/HeroSection';
-import { CategoriesBento } from './components/home/CategoriesBento';
-import { TopRatedGear } from './components/home/TopRatedGear';
-import { GuidesSection } from './components/home/GuidesSection';
-import { NewsletterSection } from './components/home/NewsletterSection';
-import { SearchModal } from './components/modals/SearchModal';
-import { ProductQuickViewModal } from './components/modals/ProductQuickViewModal';
-import { ArticleModal } from './components/modals/ArticleModal';
-import { AccountModal } from './components/modals/AccountModal';
-import { CategoryPage } from './components/pages/CategoryPage';
-import { GuidesPage } from './components/pages/GuidesPage';
+import { ScrollToTop } from './components/common/ScrollToTop';
+import { HomePage } from './components/home/HomePage';
 import { BlogPage } from './components/pages/BlogPage';
 import { AboutPage } from './components/pages/AboutPage';
 import { ContactPage } from './components/pages/ContactPage';
 import { LegalPage } from './components/pages/LegalPage';
 import { ComingSoonPage } from './components/pages/ComingSoonPage';
-import { Product, Article, Category, PageRoute } from './types';
-import { PRODUCTS } from './data/products';
+import { SearchModal } from './components/modals/SearchModal';
+import { ProductQuickViewModal } from './components/modals/ProductQuickViewModal';
+import { ArticleModal } from './components/modals/ArticleModal';
+import { AccountModal } from './components/modals/AccountModal';
+import { Product, Article, Category } from './types';
 import { SITE_CONFIG } from './data/siteConfig';
 
 export default function App() {
-  const [currentRoute, setCurrentRoute] = useState<PageRoute>('home');
-  const [routeParam, setRouteParam] = useState<string>('');
+  const navigate = useNavigate();
 
   // Modals state
   const [searchOpen, setSearchOpen] = useState(false);
@@ -55,11 +49,6 @@ export default function App() {
     );
   };
 
-  const handleNavigate = (route: PageRoute, param?: string) => {
-    setCurrentRoute(route);
-    if (param) setRouteParam(param);
-  };
-
   // Keyboard shortcut for Cmd+K search
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -74,6 +63,9 @@ export default function App() {
 
   return (
     <div className="min-h-screen flex flex-col bg-[#faf9fc] text-[#1a1c1e] font-headline-lg selection:bg-[#8E55FD] selection:text-white">
+      {/* Scroll to top / hash on route transitions */}
+      <ScrollToTop />
+
       {/* Structured Schema.org JSON-LD for SEO */}
       <script
         type="application/ld+json"
@@ -96,8 +88,6 @@ export default function App() {
 
       {/* Top Navigation Bar */}
       <Header
-        currentRoute={currentRoute}
-        onNavigate={handleNavigate}
         onOpenSearch={() => setSearchOpen(true)}
         onOpenAccount={() => setAccountOpen(true)}
         savedCount={savedProductIds.length}
@@ -105,49 +95,45 @@ export default function App() {
 
       {/* Main View Router */}
       <main className="flex-1">
-        {currentRoute === 'home' && (
-          <>
-            <HeroSection onNavigate={handleNavigate} />
-            <CategoriesBento
-              onNavigate={handleNavigate}
-              onSelectCategory={(cat) => handleNavigate('category', cat.slug)}
-            />
-            <TopRatedGear
-              onSelectProduct={(p) => setSelectedProduct(p)}
-              onNavigate={handleNavigate}
-              savedProductIds={savedProductIds}
-              onToggleSave={toggleSaveProduct}
-            />
-            <GuidesSection
-              onSelectArticle={(art) => setSelectedArticle(art)}
-              onNavigate={handleNavigate}
-            />
-            <NewsletterSection />
-          </>
-        )}
-
-        {(currentRoute === 'category' || currentRoute === 'guides' || currentRoute === 'reviews' || currentRoute === 'coming-soon') && (
-          <ComingSoonPage onNavigate={handleNavigate} />
-        )}
-
-        {currentRoute === 'blog' && (
-          <BlogPage
-            onSelectArticle={(art) => setSelectedArticle(art)}
-            onNavigate={handleNavigate}
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <HomePage
+                onSelectProduct={(p) => setSelectedProduct(p)}
+                onSelectArticle={(art) => setSelectedArticle(art)}
+                savedProductIds={savedProductIds}
+                onToggleSave={toggleSaveProduct}
+              />
+            }
           />
-        )}
-
-        {currentRoute === 'about' && <AboutPage onNavigate={handleNavigate} />}
-
-        {currentRoute === 'contact' && <ContactPage onNavigate={handleNavigate} />}
-
-        {currentRoute === 'privacy' && <LegalPage type="privacy" onNavigate={handleNavigate} />}
-
-        {currentRoute === 'terms' && <LegalPage type="terms" onNavigate={handleNavigate} />}
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route
+            path="/blog"
+            element={
+              <BlogPage
+                onSelectArticle={(art) => setSelectedArticle(art)}
+              />
+            }
+          />
+          <Route path="/coming-soon" element={<ComingSoonPage />} />
+          <Route path="/category/:slug" element={<ComingSoonPage />} />
+          <Route path="/categories" element={<ComingSoonPage />} />
+          <Route path="/buying-guides" element={<ComingSoonPage />} />
+          <Route path="/guides" element={<ComingSoonPage />} />
+          <Route path="/guides/:slug" element={<ComingSoonPage />} />
+          <Route path="/reviews" element={<ComingSoonPage />} />
+          <Route path="/privacy-policy" element={<LegalPage type="privacy" />} />
+          <Route path="/privacy" element={<LegalPage type="privacy" />} />
+          <Route path="/terms-of-service" element={<LegalPage type="terms" />} />
+          <Route path="/terms" element={<LegalPage type="terms" />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
       </main>
 
       {/* Site Footer */}
-      <Footer onNavigate={handleNavigate} />
+      <Footer />
 
       {/* Interactive Global Modals */}
       <SearchModal
@@ -155,7 +141,7 @@ export default function App() {
         onClose={() => setSearchOpen(false)}
         onSelectProduct={(p) => setSelectedProduct(p)}
         onSelectArticle={(art) => setSelectedArticle(art)}
-        onSelectCategory={(cat) => handleNavigate('category', cat.slug)}
+        onSelectCategory={(cat) => navigate(`/category/${cat.slug}`)}
       />
 
       <ProductQuickViewModal
