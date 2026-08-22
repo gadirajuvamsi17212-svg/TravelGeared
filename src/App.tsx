@@ -117,6 +117,7 @@ export default function App() {
               />
             }
           />
+          <Route path="/blog/:slug" element={<ComingSoonPage />} />
           <Route path="/coming-soon" element={<ComingSoonPage />} />
           <Route path="/category/:slug" element={<ComingSoonPage />} />
           <Route path="/categories" element={<ComingSoonPage />} />
