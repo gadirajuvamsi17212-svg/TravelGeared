@@ -1,14 +1,29 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { CATEGORIES } from '../src/data/categories';
-import { ARTICLES } from '../src/data/articles';
 import { BLOG_ARTICLES } from '../src/data/blogArticles';
 import { SITE_CONFIG } from '../src/data/siteConfig';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const rootDir = path.resolve(__dirname, '..');
+
+/**
+ * PUBLISHED BLOG POSTS CONFIGURATION
+ * --------------------------------------------------------------------------
+ * Add published blog slugs to this array when you are ready to have them indexed.
+ * When an article slug is added here, the sitemap generator will automatically
+ * include `https://travelgeared.com/blog/<slug>` with its publication date.
+ *
+ * Example:
+ * export const publishedBlogSlugs: string[] = [
+ *   'best-travel-backpacks',
+ *   'minimalist-travel-gear',
+ * ];
+ */
+export const publishedBlogSlugs: string[] = [
+  // Add published blog slugs here (e.g. "best-travel-backpacks")
+];
 
 interface SitemapEntry {
   path: string;
@@ -43,7 +58,7 @@ export function generateSitemapXml(): string {
 
   const sitemapEntries: SitemapEntry[] = [];
 
-  // 1. Core Primary Pages
+  // 1. Permanent Core Public Pages ONLY
   sitemapEntries.push({
     path: '/',
     changefreq: 'daily',
@@ -72,72 +87,28 @@ export function generateSitemapXml(): string {
     lastmod: currentDate,
   });
 
-  sitemapEntries.push({
-    path: '/buying-guides',
-    changefreq: 'weekly',
-    priority: 0.9,
-    lastmod: currentDate,
-  });
+  // 2. Controlled Published Blog Articles (Added via publishedBlogSlugs array)
+  if (Array.isArray(publishedBlogSlugs) && publishedBlogSlugs.length > 0) {
+    for (const rawSlug of publishedBlogSlugs) {
+      if (typeof rawSlug === 'string' && rawSlug.trim()) {
+        const cleanSlug = rawSlug.trim().replace(/^\/+|\/+$/g, '');
+        if (cleanSlug) {
+          // Check if article metadata exists in data file for accurate lastmod date
+          const matchingArticle = Array.isArray(BLOG_ARTICLES)
+            ? BLOG_ARTICLES.find(
+                (a) => a.slug === cleanSlug || a.id === cleanSlug
+              )
+            : undefined;
 
-  sitemapEntries.push({
-    path: '/reviews',
-    changefreq: 'weekly',
-    priority: 0.8,
-    lastmod: currentDate,
-  });
-
-  sitemapEntries.push({
-    path: '/privacy-policy',
-    changefreq: 'yearly',
-    priority: 0.3,
-    lastmod: '2026-08-01',
-  });
-
-  sitemapEntries.push({
-    path: '/terms-of-service',
-    changefreq: 'yearly',
-    priority: 0.3,
-    lastmod: '2026-08-01',
-  });
-
-  // 2. Category Pages (from CATEGORIES source of truth)
-  if (Array.isArray(CATEGORIES)) {
-    for (const cat of CATEGORIES) {
-      if (cat.slug && cat.slug.trim()) {
-        sitemapEntries.push({
-          path: `/category/${cat.slug.trim()}`,
-          changefreq: 'weekly',
-          priority: 0.8,
-          lastmod: currentDate,
-        });
-      }
-    }
-  }
-
-  // 3. Guides & In-depth Review Articles (from ARTICLES source of truth)
-  if (Array.isArray(ARTICLES)) {
-    for (const article of ARTICLES) {
-      if (article.slug && article.slug.trim()) {
-        sitemapEntries.push({
-          path: `/guides/${article.slug.trim()}`,
-          changefreq: 'monthly',
-          priority: 0.8,
-          lastmod: formatDate(article.publishDate),
-        });
-      }
-    }
-  }
-
-  // 4. Blog Articles (from BLOG_ARTICLES source of truth)
-  if (Array.isArray(BLOG_ARTICLES)) {
-    for (const article of BLOG_ARTICLES) {
-      if (article.slug && article.slug.trim()) {
-        sitemapEntries.push({
-          path: `/blog/${article.slug.trim()}`,
-          changefreq: 'monthly',
-          priority: 0.8,
-          lastmod: formatDate(article.publishDate),
-        });
+          sitemapEntries.push({
+            path: `/blog/${cleanSlug}`,
+            changefreq: 'monthly',
+            priority: 0.8,
+            lastmod: matchingArticle?.publishDate
+              ? formatDate(matchingArticle.publishDate)
+              : currentDate,
+          });
+        }
       }
     }
   }
@@ -195,7 +166,7 @@ export function writeSitemap(): void {
     console.log(`[Sitemap] Generated ${distSitemapPath}`);
   }
 
-  // Ensure robots.txt in public
+  // Ensure robots.txt in public and dist
   const robotsTxtContent = `User-agent: *
 Allow: /
 
