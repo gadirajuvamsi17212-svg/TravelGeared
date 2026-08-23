@@ -16,12 +16,25 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
   };
 
   return (
-    <section className="relative w-full overflow-hidden h-auto md:h-[calc(100svh-72px)] md:min-h-[540px] md:max-h-[calc(100svh-72px)] flex items-center">
+    <section className="relative w-full overflow-hidden h-[82vh] min-h-[720px] max-h-[860px] md:h-[calc(100svh-72px)] md:min-h-[540px] md:max-h-[calc(100svh-72px)] flex items-center">
       {/* Full Hero Image Container */}
       <div className="relative w-full h-full">
+        {/* Mobile Background Image */}
         <img
           alt="Modern traveler in an airport terminal with purple ambient lighting"
-          className="w-full h-auto md:w-full md:h-full md:object-cover md:object-[68%_38%] block select-none"
+          className="w-full h-full object-cover object-top block md:hidden select-none"
+          src={SITE_CONFIG.heroBgMobileUrl || '/Phone Home Main.png'}
+          loading="eager"
+          decoding="async"
+          onError={(e) => {
+            e.currentTarget.src = SITE_CONFIG.heroBgUrl;
+          }}
+        />
+
+        {/* Desktop & Tablet Background Image */}
+        <img
+          alt="Modern traveler in an airport terminal with purple ambient lighting"
+          className="w-full h-full object-cover md:object-[68%_38%] hidden md:block select-none"
           src={SITE_CONFIG.heroBgUrl}
           loading="eager"
           decoding="async"
@@ -30,25 +43,25 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
           }}
         />
 
-        {/* Content Overlay positioned over the left side and vertically centered */}
-        <div className="absolute inset-0 z-10 w-full px-4 sm:px-6 md:px-10 lg:px-16 max-w-7xl mx-auto flex items-center justify-start pointer-events-none">
-          <div className="w-full max-w-[90%] sm:max-w-[440px] md:max-w-[460px] lg:max-w-[490px] glass-panel p-4 sm:p-5 md:p-6 lg:p-7 rounded-xl hero-stagger shadow-xl border border-white/60 pointer-events-auto my-auto">
-            <span className="inline-block px-2.5 py-0.5 sm:px-3 sm:py-0.5 bg-[#eaddff] text-[#8E55FD] font-label-mono text-[10px] sm:text-xs font-semibold tracking-wider rounded-full mb-2 sm:mb-2.5 uppercase">
+        {/* Content Overlay positioned in the middle area on mobile (shifted upward), left-aligned on desktop */}
+        <div className="absolute inset-0 z-10 w-full px-4 sm:px-6 md:px-10 lg:px-16 max-w-7xl mx-auto flex flex-col justify-end md:justify-center items-center md:items-start pb-28 sm:pb-32 md:pb-0 pointer-events-none">
+          <div className="w-[82vw] max-w-[330px] sm:max-w-[350px] md:max-w-[460px] lg:max-w-[490px] glass-panel p-3.5 sm:p-4 md:p-6 lg:p-7 rounded-xl hero-stagger shadow-xl border border-white/60 pointer-events-auto mb-4 md:my-auto">
+            <span className="inline-block px-2 py-0.5 sm:px-3 sm:py-0.5 bg-[#eaddff] text-[#8E55FD] font-label-mono text-[8.5px] sm:text-xs font-semibold tracking-wide sm:tracking-wider rounded-full mb-1 sm:mb-2 uppercase">
               Engineered for the modern nomad
             </span>
             
-            <h1 className="font-headline-lg font-bold text-xl sm:text-2xl md:text-[28px] lg:text-[32px] lg:leading-[38px] tracking-[-0.02em] mb-2 sm:mb-3 text-[#8E55FD]">
+            <h1 className="font-headline-lg font-bold text-[16.5px] sm:text-xl md:text-[28px] lg:text-[32px] leading-snug sm:leading-tight lg:leading-[38px] tracking-[-0.02em] mb-1 sm:mb-2.5 text-[#8E55FD]">
               Engineered Travel Gear for Smarter Journeys
             </h1>
             
-            <p className="font-body-md text-xs sm:text-sm md:text-[14px] lg:text-[14.5px] lg:leading-[22px] text-[#4a4455] mb-3 sm:mb-4 lg:mb-5 max-w-[440px] leading-relaxed">
+            <p className="font-body-md text-[11.5px] leading-[16.5px] sm:text-sm md:text-[14px] lg:text-[14.5px] lg:leading-[22px] text-[#4a4455] mb-2.5 sm:mb-4 lg:mb-5 max-w-[440px]">
               Discover expertly curated equipment designed for architectural precision, spatial efficiency, and uncompromising durability. Elevate your transit experience.
             </p>
             
-            <div className="flex flex-col sm:flex-row flex-wrap gap-2.5 sm:gap-3">
+            <div className="flex flex-col sm:flex-row flex-wrap gap-2 sm:gap-3">
               <a
                 id="hero-cta-explore"
-                className="inline-flex items-center justify-center px-4 py-2 sm:px-5 sm:py-2.5 bg-[#8E55FD] text-white font-title-md text-xs sm:text-sm md:text-[15px] font-semibold rounded hover:bg-[#7232E7] btn-lift shadow-sm cursor-pointer text-center"
+                className="inline-flex items-center justify-center w-full sm:w-auto h-[38px] sm:h-[44px] px-3.5 py-1.5 sm:px-5 sm:py-2.5 bg-[#8E55FD] text-white font-title-md text-[12px] sm:text-sm md:text-[15px] font-semibold rounded hover:bg-[#7232E7] btn-lift shadow-sm cursor-pointer text-center"
                 href="#shop"
                 onClick={(e) => handleScrollTo('shop', e)}
               >
@@ -56,7 +69,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
               </a>
               <a
                 id="hero-cta-guides"
-                className="inline-flex items-center justify-center px-4 py-2 sm:px-5 sm:py-2.5 bg-white text-[#1a1c1e] border border-[#ccc3d7] font-title-md text-xs sm:text-sm md:text-[15px] font-semibold rounded hover:bg-[#f4f3f6] hover:border-[#8E55FD] hover:text-[#8E55FD] btn-lift cursor-pointer text-center"
+                className="hidden sm:inline-flex items-center justify-center px-4 py-2 sm:px-5 sm:py-2.5 bg-white text-[#1a1c1e] border border-[#ccc3d7] font-title-md text-xs sm:text-sm md:text-[15px] font-semibold rounded hover:bg-[#f4f3f6] hover:border-[#8E55FD] hover:text-[#8E55FD] btn-lift cursor-pointer text-center"
                 href="#guides"
                 onClick={(e) => handleScrollTo('guides', e)}
               >

@@ -12,6 +12,7 @@ export const SITE_CONFIG = {
   
   // Hero & Backgrounds
   heroBgUrl: '/Home Main.png',
+  heroBgMobileUrl: '/Phone Home Main.png',
   aboutBgUrl: '/About Main.png',
   contactBgUrl: '/Contact Main.png',
 
