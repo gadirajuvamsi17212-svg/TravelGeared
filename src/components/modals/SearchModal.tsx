@@ -1,14 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { PRODUCTS } from '../../data/products';
 import { ARTICLES } from '../../data/articles';
+import { getPublishedBlogArticles } from '../../data/blogArticles';
 import { CATEGORIES } from '../../data/categories';
-import { Product, Article, Category } from '../../types';
+import { Product, Article, Category, BlogArticle } from '../../types';
 
 interface SearchModalProps {
   isOpen: boolean;
   onClose: () => void;
   onSelectProduct: (product: Product) => void;
-  onSelectArticle: (article: Article) => void;
+  onSelectArticle?: (article: Article) => void;
   onSelectCategory: (category: Category) => void;
 }
 
@@ -19,6 +21,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
   onSelectArticle,
   onSelectCategory,
 }) => {
+  const navigate = useNavigate();
   const [query, setQuery] = useState('');
   const [filterType, setFilterType] = useState<'all' | 'products' | 'guides' | 'categories'>('all');
   const inputRef = useRef<HTMLInputElement>(null);
@@ -36,7 +39,6 @@ export const SearchModal: React.FC<SearchModalProps> = ({
       if (e.key === 'Escape') onClose();
       if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
         e.preventDefault();
-        // toggle search
       }
     };
     window.addEventListener('keydown', handleKeyDown);
@@ -45,11 +47,20 @@ export const SearchModal: React.FC<SearchModalProps> = ({
 
   if (!isOpen) return null;
 
+  const publishedBlogArticles = getPublishedBlogArticles();
+
   const filteredProducts = PRODUCTS.filter(
     (p) =>
       p.name.toLowerCase().includes(query.toLowerCase()) ||
       p.categoryName.toLowerCase().includes(query.toLowerCase()) ||
       p.shortDescription.toLowerCase().includes(query.toLowerCase())
+  );
+
+  const filteredBlogArticles = publishedBlogArticles.filter(
+    (a) =>
+      a.title.toLowerCase().includes(query.toLowerCase()) ||
+      a.category.toLowerCase().includes(query.toLowerCase()) ||
+      a.excerpt.toLowerCase().includes(query.toLowerCase())
   );
 
   const filteredArticles = ARTICLES.filter(
@@ -65,10 +76,12 @@ export const SearchModal: React.FC<SearchModalProps> = ({
       c.description.toLowerCase().includes(query.toLowerCase())
   );
 
+  const allGuideResultsCount = filteredBlogArticles.length + filteredArticles.length;
+
   const hasResults =
-    (filterType === 'all' && (filteredProducts.length > 0 || filteredArticles.length > 0 || filteredCategories.length > 0)) ||
+    (filterType === 'all' && (filteredProducts.length > 0 || allGuideResultsCount > 0 || filteredCategories.length > 0)) ||
     (filterType === 'products' && filteredProducts.length > 0) ||
-    (filterType === 'guides' && filteredArticles.length > 0) ||
+    (filterType === 'guides' && allGuideResultsCount > 0) ||
     (filterType === 'categories' && filteredCategories.length > 0);
 
   return (
@@ -87,21 +100,21 @@ export const SearchModal: React.FC<SearchModalProps> = ({
             ref={inputRef}
             type="text"
             className="flex-1 text-base text-[#1a1c1e] placeholder:text-[#7b7486] outline-hidden font-body-md"
-            placeholder="Search gear, categories, guides, reviews..."
+            placeholder="Search gear, categories, guides, articles..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
           />
           {query && (
             <button
               onClick={() => setQuery('')}
-              className="text-[#7b7486] hover:text-[#1a1c1e] text-xs p-1"
+              className="text-[#7b7486] hover:text-[#1a1c1e] text-xs p-1 cursor-pointer"
             >
               Clear
             </button>
           )}
           <button
             onClick={onClose}
-            className="p-1 rounded-md text-[#7b7486] hover:text-[#1a1c1e] hover:bg-[#eeedf0]"
+            className="p-1 rounded-md text-[#7b7486] hover:text-[#1a1c1e] hover:bg-[#eeedf0] cursor-pointer"
             aria-label="Close modal"
           >
             <span className="material-symbols-outlined text-sm">close</span>
@@ -112,7 +125,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
         <div className="flex gap-2 px-4 py-2 bg-[#faf9fc] border-b border-[#eeedf0] text-xs font-label-mono overflow-x-auto">
           <button
             onClick={() => setFilterType('all')}
-            className={`px-3 py-1 rounded-full transition-colors ${
+            className={`px-3 py-1 rounded-full transition-colors cursor-pointer ${
               filterType === 'all' ? 'bg-[#8E55FD] text-white font-bold' : 'bg-[#e3e2e5] text-[#4a4455] hover:bg-[#ccc3d7]'
             }`}
           >
@@ -120,7 +133,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
           </button>
           <button
             onClick={() => setFilterType('products')}
-            className={`px-3 py-1 rounded-full transition-colors ${
+            className={`px-3 py-1 rounded-full transition-colors cursor-pointer ${
               filterType === 'products' ? 'bg-[#8E55FD] text-white font-bold' : 'bg-[#e3e2e5] text-[#4a4455] hover:bg-[#ccc3d7]'
             }`}
           >
@@ -128,15 +141,15 @@ export const SearchModal: React.FC<SearchModalProps> = ({
           </button>
           <button
             onClick={() => setFilterType('guides')}
-            className={`px-3 py-1 rounded-full transition-colors ${
+            className={`px-3 py-1 rounded-full transition-colors cursor-pointer ${
               filterType === 'guides' ? 'bg-[#8E55FD] text-white font-bold' : 'bg-[#e3e2e5] text-[#4a4455] hover:bg-[#ccc3d7]'
             }`}
           >
-            Guides & Reviews ({filteredArticles.length})
+            Articles &amp; Guides ({allGuideResultsCount})
           </button>
           <button
             onClick={() => setFilterType('categories')}
-            className={`px-3 py-1 rounded-full transition-colors ${
+            className={`px-3 py-1 rounded-full transition-colors cursor-pointer ${
               filterType === 'categories' ? 'bg-[#8E55FD] text-white font-bold' : 'bg-[#e3e2e5] text-[#4a4455] hover:bg-[#ccc3d7]'
             }`}
           >
@@ -152,7 +165,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
                 inventory_2
               </span>
               <p className="font-body-md text-sm">No results found for &ldquo;{query}&rdquo;</p>
-              <p className="text-xs text-[#7b7486] mt-1">Try searching for &ldquo;backpack&rdquo;, &ldquo;carry-on&rdquo;, or &ldquo;headphones&rdquo;</p>
+              <p className="text-xs text-[#7b7486] mt-1">Try searching for &ldquo;backpack&rdquo;, &ldquo;packing&rdquo;, or &ldquo;transit&rdquo;</p>
             </div>
           ) : (
             <>
@@ -195,11 +208,48 @@ export const SearchModal: React.FC<SearchModalProps> = ({
                 </div>
               )}
 
+              {/* Blog Articles Section */}
+              {(filterType === 'all' || filterType === 'guides') && filteredBlogArticles.length > 0 && (
+                <div className="pt-3">
+                  <h4 className="text-xs font-label-mono uppercase text-[#7b7486] font-semibold mb-2">
+                    Blog Articles &amp; Insights
+                  </h4>
+                  <div className="space-y-2">
+                    {filteredBlogArticles.map((article) => (
+                      <div
+                        key={article.slug}
+                        className="flex items-center gap-3 p-2 rounded-lg hover:bg-[#f4f3f6] cursor-pointer group transition-colors"
+                        onClick={() => {
+                          navigate(`/blog/${article.slug}`);
+                          onClose();
+                        }}
+                      >
+                        <img
+                          src={article.featuredImage || article.image}
+                          alt={article.title}
+                          className="w-12 h-12 rounded object-cover border border-[#eeedf0]"
+                        />
+                        <div className="flex-1 min-w-0">
+                          <span className="inline-block px-1.5 py-0.5 bg-[#eaddff] text-[#8E55FD] text-[10px] font-label-mono rounded mb-0.5">
+                            {article.category}
+                          </span>
+                          <h5 className="font-title-md text-sm font-semibold text-[#1a1c1e] group-hover:text-[#8E55FD] truncate">
+                            {article.title}
+                          </h5>
+                          <p className="text-xs text-[#4a4455] truncate">{article.excerpt}</p>
+                        </div>
+                        <span className="text-xs text-[#7b7486]">{article.readingTime || article.readTime}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
               {/* Guides / Articles Section */}
               {(filterType === 'all' || filterType === 'guides') && filteredArticles.length > 0 && (
                 <div className="pt-3">
                   <h4 className="text-xs font-label-mono uppercase text-[#7b7486] font-semibold mb-2">
-                    Guides &amp; Editorial Reviews
+                    Buying Guides
                   </h4>
                   <div className="space-y-2">
                     {filteredArticles.map((article) => (
@@ -207,7 +257,9 @@ export const SearchModal: React.FC<SearchModalProps> = ({
                         key={article.id}
                         className="flex items-center gap-3 p-2 rounded-lg hover:bg-[#f4f3f6] cursor-pointer group transition-colors"
                         onClick={() => {
-                          onSelectArticle(article);
+                          if (onSelectArticle) {
+                            onSelectArticle(article);
+                          }
                           onClose();
                         }}
                       >

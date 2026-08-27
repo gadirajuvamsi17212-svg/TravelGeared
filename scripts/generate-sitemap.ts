@@ -1,29 +1,15 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { BLOG_ARTICLES } from '../src/data/blogArticles';
+import { BLOG_ARTICLES, publishedBlogSlugs } from '../src/data/blogArticles';
 import { SITE_CONFIG } from '../src/data/siteConfig';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const rootDir = path.resolve(__dirname, '..');
 
-/**
- * PUBLISHED BLOG POSTS CONFIGURATION
- * --------------------------------------------------------------------------
- * Add published blog slugs to this array when you are ready to have them indexed.
- * When an article slug is added here, the sitemap generator will automatically
- * include `https://travelgeared.com/blog/<slug>` with its publication date.
- *
- * Example:
- * export const publishedBlogSlugs: string[] = [
- *   'best-travel-backpacks',
- *   'minimalist-travel-gear',
- * ];
- */
-export const publishedBlogSlugs: string[] = [
-  // Add published blog slugs here (e.g. "best-travel-backpacks")
-];
+// Re-export publishedBlogSlugs so external tools/imports can also reference it from this file
+export { publishedBlogSlugs };
 
 interface SitemapEntry {
   path: string;
@@ -100,14 +86,16 @@ export function generateSitemapXml(): string {
               )
             : undefined;
 
-          sitemapEntries.push({
-            path: `/blog/${cleanSlug}`,
-            changefreq: 'monthly',
-            priority: 0.8,
-            lastmod: matchingArticle?.publishDate
-              ? formatDate(matchingArticle.publishDate)
-              : currentDate,
-          });
+          // Only include if matching article exists in data file
+          if (matchingArticle) {
+            const lastModDate = matchingArticle.publishedDate || matchingArticle.publishDate;
+            sitemapEntries.push({
+              path: `/blog/${cleanSlug}`,
+              changefreq: 'monthly',
+              priority: 0.8,
+              lastmod: lastModDate ? formatDate(lastModDate) : currentDate,
+            });
+          }
         }
       }
     }

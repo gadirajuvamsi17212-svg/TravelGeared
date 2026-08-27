@@ -5,6 +5,7 @@ import { Footer } from './components/common/Footer';
 import { ScrollToTop } from './components/common/ScrollToTop';
 import { HomePage } from './components/home/HomePage';
 import { BlogPage } from './components/pages/BlogPage';
+import { BlogPostPage } from './components/pages/BlogPostPage';
 import { AboutPage } from './components/pages/AboutPage';
 import { ContactPage } from './components/pages/ContactPage';
 import { LegalPage } from './components/pages/LegalPage';
@@ -109,15 +110,15 @@ export default function App() {
           />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/blog" element={<BlogPage />} />
           <Route
-            path="/blog"
+            path="/blog/:slug"
             element={
-              <BlogPage
-                onSelectArticle={(art) => setSelectedArticle(art)}
+              <BlogPostPage
+                onSelectProduct={(p) => setSelectedProduct(p)}
               />
             }
           />
-          <Route path="/blog/:slug" element={<ComingSoonPage />} />
           <Route path="/coming-soon" element={<ComingSoonPage />} />
           <Route path="/category/:slug" element={<ComingSoonPage />} />
           <Route path="/categories" element={<ComingSoonPage />} />
