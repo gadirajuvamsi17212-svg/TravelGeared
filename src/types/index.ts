@@ -43,41 +43,6 @@ export interface Product {
   isTopRated?: boolean;
 }
 
-export type BlogCategory = 
-  | 'Travel Gear'
-  | 'Travel Tips'
-  | 'Travel Tech'
-  | 'Packing & Organization';
-
-export interface Author {
-  name: string;
-  role: string;
-  avatar?: string;
-}
-
-export interface BlogArticle {
-  id?: string;
-  slug: string;
-  title: string;
-  category: BlogCategory;
-  excerpt: string;
-  author: Author;
-  publishedDate: string;
-  readingTime: string;
-  featuredImage: string;
-  content: string;
-  seoTitle: string;
-  metaDescription: string;
-  isFeatured?: boolean;
-  featuredProducts?: string[];
-  // Backwards compatibility aliases
-  image?: string;
-  readTime?: string;
-  publishDate?: string;
-  tag?: string;
-  filterCategory?: string;
-}
-
 export interface Article {
   id: string;
   title: string;

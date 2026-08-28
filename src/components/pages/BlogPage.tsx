@@ -1,61 +1,34 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
-import { getPublishedBlogArticles } from '../../data/blogArticles';
-import { BlogCategory } from '../../types';
-import { SITE_CONFIG } from '../../data/siteConfig';
-import { SEOHead } from '../seo/SEOHead';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { BLOG_ARTICLES, BlogArticle } from '../../data/blogArticles';
+import { Article } from '../../types';
 
-type FilterCategory = 'ALL' | BlogCategory;
+interface BlogPageProps {
+  onSelectArticle: (article: Article) => void;
+}
 
-export const BlogPage: React.FC = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const categoryParam = searchParams.get('category');
+type FilterCategory = 'ALL' | 'TRAVEL TIPS' | 'PACKING' | 'TRAVEL TECH' | 'TRAVEL COMFORT';
 
-  const filterCategories: FilterCategory[] = [
-    'ALL',
-    'Travel Gear',
-    'Travel Tips',
-    'Travel Tech',
-    'Packing & Organization',
-  ];
-
-  const initialCategory: FilterCategory = (
-    categoryParam && filterCategories.includes(categoryParam as FilterCategory)
-      ? categoryParam
-      : 'ALL'
-  ) as FilterCategory;
-
-  const [selectedCategory, setSelectedCategory] = useState<FilterCategory>(initialCategory);
+export const BlogPage: React.FC<BlogPageProps> = ({ onSelectArticle }) => {
+  const [selectedCategory, setSelectedCategory] = useState<FilterCategory>('ALL');
   const [subscribed, setSubscribed] = useState(false);
   const [email, setEmail] = useState('');
 
-  // Sync category state with URL query param if present
-  useEffect(() => {
-    if (categoryParam && filterCategories.includes(categoryParam as FilterCategory)) {
-      setSelectedCategory(categoryParam as FilterCategory);
-    }
-  }, [categoryParam]);
+  const filterCategories: FilterCategory[] = [
+    'ALL',
+    'TRAVEL TIPS',
+    'PACKING',
+    'TRAVEL TECH',
+    'TRAVEL COMFORT',
+  ];
 
-  const handleCategoryChange = (cat: FilterCategory) => {
-    setSelectedCategory(cat);
-    if (cat === 'ALL') {
-      searchParams.delete('category');
-      setSearchParams(searchParams);
-    } else {
-      setSearchParams({ category: cat });
-    }
-  };
-
-  const publishedArticles = getPublishedBlogArticles();
-  const featuredArticle = publishedArticles.find((a) => a.isFeatured) || publishedArticles[0];
-
-  // Articles in the grid (excluding the featured one for the main grid if 'ALL' is selected)
-  const gridArticles = publishedArticles.filter((article) => {
-    if (featuredArticle && article.slug === featuredArticle.slug && selectedCategory === 'ALL') {
-      return false;
-    }
+  const featuredArticle = BLOG_ARTICLES.find((a) => a.isFeatured) || BLOG_ARTICLES[0];
+  
+  // Articles in the grid (excluding the featured one for the main grid, or filtered accordingly)
+  const gridArticles = BLOG_ARTICLES.filter((article) => {
+    if (article.id === featuredArticle.id && selectedCategory === 'ALL') return false;
     if (selectedCategory === 'ALL') return true;
-    return article.category === selectedCategory;
+    return article.filterCategory === selectedCategory;
   });
 
   const handleSubscribe = (e: React.FormEvent) => {
@@ -71,14 +44,6 @@ export const BlogPage: React.FC = () => {
 
   return (
     <div className="w-full bg-[#faf9fc] min-h-screen text-[#1a1c1e]">
-      {/* Dynamic SEO Meta */}
-      <SEOHead
-        title="Travel Insights & Gear Guides | TravelGeared"
-        description="Expert travel tips, gear breakdowns, packing strategies, and lifestyle advice to help you travel smarter."
-        canonicalUrl={`${SITE_CONFIG.url}/blog`}
-        ogType="website"
-      />
-
       {/* Breadcrumb Bar */}
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-12 lg:px-16 pt-6 pb-2">
         <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs font-label-mono text-[#7b7486]">
@@ -110,7 +75,7 @@ export const BlogPage: React.FC = () => {
           {filterCategories.map((cat) => (
             <button
               key={cat}
-              onClick={() => handleCategoryChange(cat)}
+              onClick={() => setSelectedCategory(cat)}
               className={`px-4 sm:px-5 py-2 rounded font-label-mono text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer ${
                 selectedCategory === cat
                   ? 'bg-[#8E55FD] text-white shadow-xs'
@@ -125,13 +90,13 @@ export const BlogPage: React.FC = () => {
         {/* Featured Hero Article (Visible when ALL is selected) */}
         {selectedCategory === 'ALL' && featuredArticle && (
           <div className="mb-12 md:mb-16">
-            <Link
-              to={`/blog/${featuredArticle.slug}`}
-              className="group bg-white rounded-xl border border-[#ccc3d7] overflow-hidden hover:border-[#8E55FD] hover-lift transition-all duration-300 grid grid-cols-1 lg:grid-cols-12 cursor-pointer shadow-sm block"
+            <div
+              onClick={() => onSelectArticle(featuredArticle)}
+              className="group bg-white rounded-xl border border-[#ccc3d7] overflow-hidden hover:border-[#8E55FD] hover-lift transition-all duration-300 grid grid-cols-1 lg:grid-cols-12 cursor-pointer shadow-sm"
             >
               <div className="lg:col-span-7 h-64 sm:h-80 lg:h-[420px] overflow-hidden relative">
                 <img
-                  src={featuredArticle.featuredImage || featuredArticle.image}
+                  src={featuredArticle.image}
                   alt={featuredArticle.title}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 select-none"
                   loading="eager"
@@ -146,9 +111,9 @@ export const BlogPage: React.FC = () => {
               <div className="lg:col-span-5 p-6 sm:p-8 lg:p-10 flex flex-col justify-between">
                 <div>
                   <div className="flex items-center gap-3 text-xs font-label-mono text-[#7b7486] mb-3">
-                    <span>{featuredArticle.publishedDate || featuredArticle.publishDate}</span>
+                    <span>{featuredArticle.publishDate}</span>
                     <span>•</span>
-                    <span>{featuredArticle.readingTime || featuredArticle.readTime}</span>
+                    <span>{featuredArticle.readTime}</span>
                   </div>
                   <h2 className="font-headline-lg font-bold text-2xl sm:text-3xl text-[#1a1c1e] group-hover:text-[#8E55FD] transition-colors mb-4 leading-snug">
                     {featuredArticle.title}
@@ -164,21 +129,21 @@ export const BlogPage: React.FC = () => {
                   </span>
                 </div>
               </div>
-            </Link>
+            </div>
           </div>
         )}
 
         {/* Articles Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-16">
           {gridArticles.map((article) => (
-            <Link
-              key={article.slug}
-              to={`/blog/${article.slug}`}
+            <div
+              key={article.id}
+              onClick={() => onSelectArticle(article)}
               className="group bg-white rounded-xl border border-[#ccc3d7] overflow-hidden hover:border-[#8E55FD] hover-lift transition-all duration-300 flex flex-col justify-between cursor-pointer shadow-xs"
             >
               <div className="h-48 sm:h-52 overflow-hidden relative">
                 <img
-                  src={article.featuredImage || article.image}
+                  src={article.image}
                   alt={article.title}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 select-none"
                   loading="lazy"
@@ -186,16 +151,16 @@ export const BlogPage: React.FC = () => {
                 />
                 <div className="absolute top-3 left-3">
                   <span className="font-label-mono text-[11px] font-bold uppercase bg-white/90 backdrop-blur-xs text-[#8E55FD] px-2.5 py-0.5 rounded shadow-2xs">
-                    {article.category}
+                    {article.filterCategory}
                   </span>
                 </div>
               </div>
               <div className="p-6 flex-1 flex flex-col justify-between">
                 <div>
                   <div className="flex items-center gap-2 text-[11px] font-label-mono text-[#7b7486] mb-2.5">
-                    <span>{article.publishedDate || article.publishDate}</span>
+                    <span>{article.publishDate}</span>
                     <span>•</span>
-                    <span>{article.readingTime || article.readTime}</span>
+                    <span>{article.readTime}</span>
                   </div>
                   <h3 className="font-title-md font-bold text-lg text-[#1a1c1e] group-hover:text-[#8E55FD] transition-colors mb-2.5 leading-snug line-clamp-2">
                     {article.title}
@@ -211,7 +176,7 @@ export const BlogPage: React.FC = () => {
                   </span>
                 </div>
               </div>
-            </Link>
+            </div>
           ))}
         </div>
 
@@ -226,7 +191,7 @@ export const BlogPage: React.FC = () => {
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link
-                to="/category/travel-backpacks"
+                to="/#shop"
                 className="px-6 py-3 border border-[#ccc3d7] rounded hover:bg-[#e8e8eb] transition-colors font-title-md text-sm font-semibold text-[#1a1c1e] cursor-pointer inline-flex items-center"
               >
                 Travel Gear
