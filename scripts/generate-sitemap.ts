@@ -22,7 +22,7 @@ const rootDir = path.resolve(__dirname, '..');
  * ];
  */
 export const publishedBlogSlugs: string[] = [
-  // Add published blog slugs here (e.g. "best-travel-backpacks")
+  'best-backpacks-2026-guide',
 ];
 
 interface SitemapEntry {
