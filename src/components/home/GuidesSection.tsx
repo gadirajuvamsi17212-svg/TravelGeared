@@ -1,16 +1,15 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ARTICLES } from '../../data/articles';
 import { Article, PageRoute } from '../../types';
 
 interface GuidesSectionProps {
-  onSelectArticle: (article: Article) => void;
+  onSelectArticle?: (article: Article) => void;
   onNavigate?: (route: PageRoute) => void;
 }
 
-export const GuidesSection: React.FC<GuidesSectionProps> = ({
-  onSelectArticle,
-  onNavigate,
-}) => {
+export const GuidesSection: React.FC<GuidesSectionProps> = () => {
+  const navigate = useNavigate();
   const featuredArticles = ARTICLES.slice(0, 2);
 
   return (
@@ -31,14 +30,12 @@ export const GuidesSection: React.FC<GuidesSectionProps> = ({
           const isPrimaryTag = idx === 0;
 
           return (
-            <a
+            <div
               key={article.id}
               id={`article-card-${article.slug}`}
               className="group relative rounded-xl overflow-hidden h-72 sm:h-80 hover-lift block shadow-md cursor-pointer"
-              href={`/guides/${article.slug}`}
-              onClick={(e) => {
-                e.preventDefault();
-                onSelectArticle(article);
+              onClick={() => {
+                navigate(`/blog/${article.slug || article.id}`);
               }}
             >
               {/* Background Image */}
@@ -84,7 +81,7 @@ export const GuidesSection: React.FC<GuidesSectionProps> = ({
                   {article.excerpt}
                 </p>
               </div>
-            </a>
+            </div>
           );
         })}
       </div>

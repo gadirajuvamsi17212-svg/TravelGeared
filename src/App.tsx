@@ -7,6 +7,7 @@ import { HomePage } from './components/home/HomePage';
 import { BlogPage } from './components/pages/BlogPage';
 import { AboutPage } from './components/pages/AboutPage';
 import { ContactPage } from './components/pages/ContactPage';
+import { BlogDetailPage } from './components/pages/BlogDetailPage';
 import { LegalPage } from './components/pages/LegalPage';
 import { ComingSoonPage } from './components/pages/ComingSoonPage';
 import { SearchModal } from './components/modals/SearchModal';
@@ -101,7 +102,6 @@ export default function App() {
             element={
               <HomePage
                 onSelectProduct={(p) => setSelectedProduct(p)}
-                onSelectArticle={(art) => setSelectedArticle(art)}
                 savedProductIds={savedProductIds}
                 onToggleSave={toggleSaveProduct}
               />
@@ -111,13 +111,12 @@ export default function App() {
           <Route path="/contact" element={<ContactPage />} />
           <Route
             path="/blog"
-            element={
-              <BlogPage
-                onSelectArticle={(art) => setSelectedArticle(art)}
-              />
-            }
+            element={<BlogPage />}
           />
-          <Route path="/blog/:slug" element={<ComingSoonPage />} />
+          <Route
+            path="/blog/:slug"
+            element={<BlogDetailPage onSelectProduct={(p) => setSelectedProduct(p)} />}
+          />
           <Route path="/coming-soon" element={<ComingSoonPage />} />
           <Route path="/category/:slug" element={<ComingSoonPage />} />
           <Route path="/categories" element={<ComingSoonPage />} />
@@ -141,7 +140,6 @@ export default function App() {
         isOpen={searchOpen}
         onClose={() => setSearchOpen(false)}
         onSelectProduct={(p) => setSelectedProduct(p)}
-        onSelectArticle={(art) => setSelectedArticle(art)}
         onSelectCategory={(cat) => navigate(`/category/${cat.slug}`)}
       />
 

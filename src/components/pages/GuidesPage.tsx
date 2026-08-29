@@ -1,17 +1,23 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ARTICLES } from '../../data/articles';
 import { Article, PageRoute } from '../../types';
 
 interface GuidesPageProps {
-  onSelectArticle: (article: Article) => void;
+  onSelectArticle?: (article: Article) => void;
   onNavigate: (route: PageRoute) => void;
 }
 
 export const GuidesPage: React.FC<GuidesPageProps> = ({
-  onSelectArticle,
   onNavigate,
 }) => {
   const [selectedFilter, setSelectedFilter] = useState<'all' | 'Guide' | 'Review' | 'Strategy'>('all');
+  const navigate = useNavigate();
+
+  const handleArticleClick = (article: Article) => {
+    const slug = article.slug || article.id;
+    navigate(`/blog/${slug}`);
+  };
 
   const filtered = ARTICLES.filter((a) =>
     selectedFilter === 'all' ? true : a.category === selectedFilter
@@ -68,7 +74,7 @@ export const GuidesPage: React.FC<GuidesPageProps> = ({
             <div
               key={article.id}
               className="group bg-white rounded-xl border border-[#ccc3d7] overflow-hidden hover-lift shadow-xs cursor-pointer flex flex-col justify-between"
-              onClick={() => onSelectArticle(article)}
+              onClick={() => handleArticleClick(article)}
             >
               <div className="relative h-56 sm:h-64 overflow-hidden bg-black">
                 <img

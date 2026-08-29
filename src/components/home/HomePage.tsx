@@ -8,14 +8,13 @@ import { Product, Article } from '../../types';
 
 interface HomePageProps {
   onSelectProduct: (product: Product) => void;
-  onSelectArticle: (article: Article) => void;
+  onSelectArticle?: (article: Article) => void;
   savedProductIds: string[];
   onToggleSave: (productId: string) => void;
 }
 
 export const HomePage: React.FC<HomePageProps> = ({
   onSelectProduct,
-  onSelectArticle,
   savedProductIds,
   onToggleSave,
 }) => {
@@ -28,7 +27,7 @@ export const HomePage: React.FC<HomePageProps> = ({
         savedProductIds={savedProductIds}
         onToggleSave={onToggleSave}
       />
-      <GuidesSection onSelectArticle={onSelectArticle} />
+      <GuidesSection />
       <NewsletterSection />
     </>
   );

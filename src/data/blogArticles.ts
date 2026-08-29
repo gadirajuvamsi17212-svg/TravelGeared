@@ -9,7 +9,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
   {
     id: 'blog-best-backpacks-2026',
     title: 'Best Backpacks for 2026: Find the Right Bag for Your Next Journey',
-    slug: 'best-backpacks-2026-guide',
+    slug: 'best-backpacks-for-2026',
     tag: 'Backpack Guide',
     filterCategory: 'PACKING',
     category: 'Guide',

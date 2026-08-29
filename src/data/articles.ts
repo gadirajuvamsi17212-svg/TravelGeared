@@ -4,7 +4,7 @@ export const ARTICLES: Article[] = [
   {
     id: 'art-best-backpacks-2026',
     title: 'Best Backpacks for 2026: Find the Right Bag for Your Next Journey',
-    slug: 'best-backpacks-2026-guide',
+    slug: 'best-backpacks-for-2026',
     tag: 'Backpack Guide',
     category: 'Guide',
     excerpt: 'Backpacks have quietly become one of the most important travel and lifestyle purchases you can make. We break down the 7 best backpacks for 2026 with clear specs and honest details.',

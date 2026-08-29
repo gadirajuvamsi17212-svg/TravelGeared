@@ -1,18 +1,24 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { BLOG_ARTICLES, BlogArticle } from '../../data/blogArticles';
 import { Article } from '../../types';
 
 interface BlogPageProps {
-  onSelectArticle: (article: Article) => void;
+  onSelectArticle?: (article: Article) => void;
 }
 
 type FilterCategory = 'ALL' | 'TRAVEL TIPS' | 'PACKING' | 'TRAVEL TECH' | 'TRAVEL COMFORT';
 
-export const BlogPage: React.FC<BlogPageProps> = ({ onSelectArticle }) => {
+export const BlogPage: React.FC<BlogPageProps> = () => {
   const [selectedCategory, setSelectedCategory] = useState<FilterCategory>('ALL');
   const [subscribed, setSubscribed] = useState(false);
   const [email, setEmail] = useState('');
+  const navigate = useNavigate();
+
+  const handleArticleClick = (article: BlogArticle | Article) => {
+    const slug = article.slug || article.id;
+    navigate(`/blog/${slug}`);
+  };
 
   const filterCategories: FilterCategory[] = [
     'ALL',
@@ -91,7 +97,7 @@ export const BlogPage: React.FC<BlogPageProps> = ({ onSelectArticle }) => {
         {selectedCategory === 'ALL' && featuredArticle && (
           <div className="mb-12 md:mb-16">
             <div
-              onClick={() => onSelectArticle(featuredArticle)}
+              onClick={() => handleArticleClick(featuredArticle)}
               className="group bg-white rounded-xl border border-[#ccc3d7] overflow-hidden hover:border-[#8E55FD] hover-lift transition-all duration-300 grid grid-cols-1 lg:grid-cols-12 cursor-pointer shadow-sm"
             >
               <div className="lg:col-span-7 h-64 sm:h-80 lg:h-[420px] overflow-hidden relative">
@@ -138,7 +144,7 @@ export const BlogPage: React.FC<BlogPageProps> = ({ onSelectArticle }) => {
           {gridArticles.map((article) => (
             <div
               key={article.id}
-              onClick={() => onSelectArticle(article)}
+              onClick={() => handleArticleClick(article)}
               className="group bg-white rounded-xl border border-[#ccc3d7] overflow-hidden hover:border-[#8E55FD] hover-lift transition-all duration-300 flex flex-col justify-between cursor-pointer shadow-xs"
             >
               <div className="h-48 sm:h-52 overflow-hidden relative">

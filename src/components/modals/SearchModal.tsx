@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { PRODUCTS } from '../../data/products';
 import { ARTICLES } from '../../data/articles';
 import { CATEGORIES } from '../../data/categories';
@@ -8,7 +9,7 @@ interface SearchModalProps {
   isOpen: boolean;
   onClose: () => void;
   onSelectProduct: (product: Product) => void;
-  onSelectArticle: (article: Article) => void;
+  onSelectArticle?: (article: Article) => void;
   onSelectCategory: (category: Category) => void;
 }
 
@@ -16,12 +17,12 @@ export const SearchModal: React.FC<SearchModalProps> = ({
   isOpen,
   onClose,
   onSelectProduct,
-  onSelectArticle,
   onSelectCategory,
 }) => {
   const [query, setQuery] = useState('');
   const [filterType, setFilterType] = useState<'all' | 'products' | 'guides' | 'categories'>('all');
   const inputRef = useRef<HTMLInputElement>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (isOpen) {
@@ -207,7 +208,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
                         key={article.id}
                         className="flex items-center gap-3 p-2 rounded-lg hover:bg-[#f4f3f6] cursor-pointer group transition-colors"
                         onClick={() => {
-                          onSelectArticle(article);
+                          navigate(`/blog/${article.slug || article.id}`);
                           onClose();
                         }}
                       >
