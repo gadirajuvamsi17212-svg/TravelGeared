@@ -8,7 +8,7 @@ export const ARTICLES: Article[] = [
     tag: 'Backpack Guide',
     category: 'Guide',
     excerpt: 'Backpacks have quietly become one of the most important travel and lifestyle purchases you can make. We break down the 7 best backpacks for 2026 with clear specs and honest details.',
-    image: '/backpack-guide-hero.jpg',
+    image: '/Blog Banner Images/Best Backpacks for 2026.png',
     readTime: '9 min read',
     publishDate: 'Feb 15, 2026',
     author: {
@@ -39,7 +39,7 @@ Here's a side-by-side look at all seven backpacks before we dive into the full b
 | **PUMA Teamgoal Backpack Premium** | $60 | 35L | Sports, Gym, Everyday Use | 50%+ recycled material, separate gear compartment |
 | **Samsonite Mother Lode Backpack** | $195 | 56L | Long Trips, Business Travel, Heavy Packers | 15 pockets, 7 compartments, expands 1.5" |
 
-![Backpack Organization Layout](/backpack-organization.jpg)
+![Traveler with Technical Travel Backpack in Mountain Vista](/Blog%20images/Travel%20Backpacks.png)
 
 ### Top Backpacks for 2026
 
@@ -126,6 +126,8 @@ For travelers who need maximum organization, the Samsonite Mother Lode Travel Ba
 [BUY NOW](https://amazon.com)
 
 ---
+
+![TravelGeared Technical Adventure Backpack on Alpine Trail](/Blog%20images/Travelgeared%20Backpacks.png)
 
 ### How to Choose the Best Backpack in 2026
 
