@@ -18,7 +18,7 @@ export const SITE_CONFIG = {
 
   socials: {
     linkedin: 'https://linkedin.com/company/travelgeared',
-    instagram: 'https://instagram.com/travelgeared',
+    instagram: 'https://www.instagram.com/travelgearedofficial/',
     facebook: 'https://facebook.com/travelgeared',
   },
 

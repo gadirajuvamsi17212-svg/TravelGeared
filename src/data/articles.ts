@@ -51,7 +51,7 @@ The Adidas Vista Backpack is built for students, commuters, and active casual we
 - **Capacity**: 30L
 - **Key Specs**: 6.5"D x 12.25"W x 19.5"H | 16" Laptop Sleeve | 5 Pockets | 2 Water Bottle Pockets
 
-[BUY NOW](https://amazon.com)
+[BUY NOW](https://www.amazon.com/adidas-Vista-Sports-Backpack-Utility/dp/B0GVXBWZ46/)
 
 ---
 
@@ -63,7 +63,7 @@ Designed for high school students, college students, and commuters, the Adidas E
 - **Capacity**: 34L
 - **Key Specs**: 12.75" x 9" x 19.75" | 16" Laptop Sleeve | 4 Compartments | 5-Year Warranty
 
-[BUY NOW](https://amazon.com)
+[BUY NOW](https://www.amazon.com/adidas-983299-Excel-7-Backpack/dp/B0DGYW5PGJ)
 
 ---
 
@@ -75,7 +75,7 @@ Frequent flyers looking for a lightweight, durable carry-on travel backpack will
 - **Capacity**: 35L
 - **Key Specs**: 19.3"H x 14.6"W x 10.2"D | AirScape Back Panel | Luggage Pass-Through Sleeve
 
-[BUY NOW](https://amazon.com)
+[BUY NOW](https://www.amazon.com/Osprey-Daylite-Travel-Tumbleweed-Yellow/dp/B0CN1GG29P/)
 
 ---
 
@@ -87,7 +87,7 @@ For travelers who want flexibility without sacrificing airline compliance, the O
 - **Capacity**: 26–32L (Expandable)
 - **Key Specs**: 16.9"H x 13"W x 6.3"D | Personal Item Size | 2" Expansion | 4 Pockets
 
-[BUY NOW](https://amazon.com)
+[BUY NOW](https://www.amazon.com/Osprey-Daylite-Expandable-Travel-Black/dp/B0CN1JCRSD/)
 
 ---
 
@@ -99,7 +99,7 @@ Athletes and students who need extra organization will like the Nike Hoops Elite
 - **Capacity**: 32L
 - **Key Specs**: 7.78"D x 11.7"W x 17.75"H | 3 Separate Compartments | Water-Resistant
 
-[BUY NOW](https://amazon.com)
+[BUY NOW](https://www.amazon.com/dp/B0HCLTYCK5/)
 
 ---
 
@@ -111,7 +111,7 @@ The PUMA Teamgoal Backpack Premium is a spacious, multi-functional backpack buil
 - **Capacity**: 35L
 - **Key Specs**: Dedicated Ball & Shoe Compartment | 50%+ Recycled Material | U-Zip Opening
 
-[BUY NOW](https://amazon.com)
+[BUY NOW](https://www.amazon.com/PUMA-9045802-TeamGOAL-Backpack-Premium/dp/B0CLGDF9ZG)
 
 ---
 
@@ -123,7 +123,7 @@ For travelers who need maximum organization, the Samsonite Mother Lode Travel Ba
 - **Capacity**: 56L (Expandable)
 - **Key Specs**: 9.5"D x 13.5"W x 21.5"H | 15 Pockets | 7 Compartments | Stowable Straps
 
-[BUY NOW](https://amazon.com)
+[BUY NOW](https://www.amazon.com/Samsonite-Mother-Lode-Travel-Backpack/dp/B0DH8Y4WRT/)
 
 ---
 
