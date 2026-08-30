@@ -37,11 +37,12 @@ export const GuidesSection: React.FC<GuidesSectionProps> = () => {
               }}
             >
               {/* Image Container - Dedicated and contains ONLY the image */}
-              <div className="w-full h-52 sm:h-64 overflow-hidden bg-[#e3e2e5]">
+              <div className="w-full h-52 sm:h-64 md:h-[296px] overflow-hidden bg-[#e3e2e5]">
                 <img
                   src={article.image}
                   alt={article.title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 select-none block"
+                  className="w-full h-[296px] object-cover transition-transform duration-700 group-hover:scale-105 select-none block"
+                  style={{ height: '296px' }}
                   loading="eager"
                   decoding="async"
                   onError={(e) => {
