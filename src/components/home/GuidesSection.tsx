@@ -26,60 +26,60 @@ export const GuidesSection: React.FC<GuidesSectionProps> = () => {
 
       {/* Articles Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-        {featuredArticles.map((article, idx) => {
-          const isPrimaryTag = idx === 0;
-
+        {featuredArticles.map((article) => {
           return (
             <div
               key={article.id}
               id={`article-card-${article.slug}`}
-              className="group relative rounded-xl overflow-hidden h-72 sm:h-80 hover-lift block shadow-md cursor-pointer"
+              className="group bg-white rounded-xl border border-[#ccc3d7] overflow-hidden hover:border-[#8E55FD] hover-lift transition-all duration-300 flex flex-col justify-between cursor-pointer shadow-xs"
               onClick={() => {
                 navigate(`/blog/${article.slug || article.id}`);
               }}
             >
-              {/* Background Image */}
-              <img
-                src={article.image}
-                alt={article.title}
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                loading="eager"
-                decoding="async"
-                onError={(e) => {
-                  const target = e.currentTarget;
-                  if (article.id === 'art-tech-organizers') {
-                    target.src = 'https://lh3.googleusercontent.com/aida-public/AB6AXuCTmIF9yEPMuZ8M4ReWgUABOYB5p4Ljz9pZdFHidgG5kmf3R-xtAMVxW5zW6tTJjhjhX07pZVt2tb_QJWWKBgNjgQfmfHWGNyBUZq4vHs3_sfEwkfB-E1_eChVq6WJfV9r2UoUSwRbyWXUozt7mBQccQzhY2AiR226vjuP-t1lwSbs-Co4DvoGcuscgCQB0ZJMy8xERO7UJNB_1kXowcjFP8hhVXRv6ISTBOTaYeJAU0NueJ8bbRZJKyw';
-                  } else if (article.id === 'art-one-bag-life') {
-                    target.src = 'https://lh3.googleusercontent.com/aida-public/AB6AXuAm99hPX7pBgs3XKZjyyGD6AfjL0p0TXKUr-jC2bkFc8Iyp4K2I1UG_L_H1gVVT4ItAG5tJBjX07up-HOgt8l2cdbOhhuxh0LJaWVWPSfG2WPZjKH5LDE52wkWodoykxvvDs4P36nC8nJw5fm3_xKthYLau-qlcnoOyBtykWV1nBUF3VQ4cogKEHcC7ITJnU0-9GQn6sHmq9JRldDN6Gf9pEMkqXTCVJmKi6CJlDrJ3kAyak6WzCFNBqg';
-                  }
-                }}
-              />
-              
-              {/* Subtle Dark Gradient Overlay from bottom upward */}
-              <div 
-                className="absolute inset-0 pointer-events-none"
-                style={{
-                  background: 'linear-gradient(to top, rgba(10, 8, 16, 0.90) 0%, rgba(10, 8, 16, 0.50) 50%, rgba(10, 8, 16, 0.15) 100%)'
-                }}
-              />
+              {/* Image Container - Dedicated and contains ONLY the image */}
+              <div className="w-full h-52 sm:h-64 overflow-hidden bg-[#e3e2e5]">
+                <img
+                  src={article.image}
+                  alt={article.title}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 select-none block"
+                  loading="eager"
+                  decoding="async"
+                  onError={(e) => {
+                    const target = e.currentTarget;
+                    if (article.id === 'art-tech-organizers') {
+                      target.src = 'https://lh3.googleusercontent.com/aida-public/AB6AXuCTmIF9yEPMuZ8M4ReWgUABOYB5p4Ljz9pZdFHidgG5kmf3R-xtAMVxW5zW6tTJjhjhX07pZVt2tb_QJWWKBgNjgQfmfHWGNyBUZq4vHs3_sfEwkfB-E1_eChVq6WJfV9r2UoUSwRbyWXUozt7mBQccQzhY2AiR226vjuP-t1lwSbs-Co4DvoGcuscgCQB0ZJMy8xERO7UJNB_1kXowcjFP8hhVXRv6ISTBOTaYeJAU0NueJ8bbRZJKyw';
+                    } else if (article.id === 'art-one-bag-life') {
+                      target.src = 'https://lh3.googleusercontent.com/aida-public/AB6AXuAm99hPX7pBgs3XKZjyyGD6AfjL0p0TXKUr-jC2bkFc8Iyp4K2I1UG_L_H1gVVT4ItAG5tJBjX07up-HOgt8l2cdbOhhuxh0LJaWVWPSfG2WPZjKH5LDE52wkWodoykxvvDs4P36nC8nJw5fm3_xKthYLau-qlcnoOyBtykWV1nBUF3VQ4cogKEHcC7ITJnU0-9GQn6sHmq9JRldDN6Gf9pEMkqXTCVJmKi6CJlDrJ3kAyak6WzCFNBqg';
+                    }
+                  }}
+                />
+              </div>
 
-              {/* Text Content */}
-              <div className="absolute bottom-0 left-0 p-6 sm:p-8 w-full z-10">
-                <span
-                  className={`inline-block px-3 py-1 font-label-mono text-xs font-semibold rounded mb-2.5 uppercase tracking-wider ${
-                    isPrimaryTag
-                      ? 'bg-[#8E55FD]/90 text-white'
-                      : 'bg-[#faf9fc]/90 text-[#1a1c1e]'
-                  }`}
-                >
-                  {article.tag}
-                </span>
-                <h3 className="font-headline-lg text-xl sm:text-2xl font-bold text-white mb-2 leading-tight group-hover:text-[#d2bcff] transition-colors">
-                  {article.title}
-                </h3>
-                <p className="font-body-md text-[#e3e2e5] max-w-[480px] line-clamp-2 text-sm leading-relaxed">
-                  {article.excerpt}
-                </p>
+              {/* Content Container - Completely below the image */}
+              <div className="p-6 flex-1 flex flex-col justify-between bg-white">
+                <div>
+                  <div className="flex items-center justify-between gap-2 mb-3">
+                    <span className="inline-block px-3 py-1 font-label-mono text-xs font-semibold rounded uppercase tracking-wider bg-[#f5effb] text-[#8E55FD]">
+                      {article.tag}
+                    </span>
+                    <span className="font-label-mono text-xs text-[#7b7486]">
+                      {article.readTime}
+                    </span>
+                  </div>
+                  <h3 className="font-headline-lg text-xl font-bold text-[#1a1c1e] mb-2 leading-tight group-hover:text-[#8E55FD] transition-colors">
+                    {article.title}
+                  </h3>
+                  <p className="font-body-md text-[#4a4455] line-clamp-2 text-sm leading-relaxed mb-4">
+                    {article.excerpt}
+                  </p>
+                </div>
+
+                <div className="inline-flex items-center gap-1.5 font-label-mono text-xs font-bold uppercase tracking-wider text-[#8E55FD] group-hover:text-[#7232E7] transition-colors pt-3 border-t border-[#eeedf0]">
+                  Read Guide
+                  <span className="material-symbols-outlined text-sm icon-slide-right">
+                    arrow_forward
+                  </span>
+                </div>
               </div>
             </div>
           );

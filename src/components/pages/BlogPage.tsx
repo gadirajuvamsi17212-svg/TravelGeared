@@ -98,28 +98,33 @@ export const BlogPage: React.FC<BlogPageProps> = () => {
           <div className="mb-12 md:mb-16">
             <div
               onClick={() => handleArticleClick(featuredArticle)}
-              className="group bg-white rounded-xl border border-[#ccc3d7] overflow-hidden hover:border-[#8E55FD] hover-lift transition-all duration-300 grid grid-cols-1 lg:grid-cols-12 cursor-pointer shadow-sm"
+              className="group bg-white rounded-xl border border-[#ccc3d7] overflow-hidden hover:border-[#8E55FD] hover-lift transition-all duration-300 flex flex-col cursor-pointer shadow-sm"
             >
-              <div className="lg:col-span-7 h-64 sm:h-80 lg:h-[420px] overflow-hidden relative">
+              {/* Image Container - Dedicated, auto-height, preserving natural aspect ratio without cropping */}
+              <div className="w-full overflow-hidden bg-[#faf9fc]">
                 <img
                   src={featuredArticle.image}
                   alt={featuredArticle.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 select-none"
+                  className="w-full h-auto block select-none"
                   loading="eager"
                   decoding="async"
                 />
-                <div className="absolute top-4 left-4">
-                  <span className="font-label-mono text-xs font-bold uppercase bg-[#8E55FD] text-white px-3 py-1 rounded shadow-xs">
-                    Featured
-                  </span>
-                </div>
               </div>
-              <div className="lg:col-span-5 p-6 sm:p-8 lg:p-10 flex flex-col justify-between">
+              {/* Content Container - Completely below the image */}
+              <div className="p-6 sm:p-8 lg:p-10 flex flex-col justify-between bg-white">
                 <div>
-                  <div className="flex items-center gap-3 text-xs font-label-mono text-[#7b7486] mb-3">
-                    <span>{featuredArticle.publishDate}</span>
-                    <span>•</span>
-                    <span>{featuredArticle.readTime}</span>
+                  <div className="flex flex-wrap items-center gap-2 mb-3">
+                    <span className="font-label-mono text-xs font-bold uppercase bg-[#8E55FD] text-white px-3 py-1 rounded shadow-xs">
+                      Featured
+                    </span>
+                    <span className="font-label-mono text-xs font-bold uppercase text-[#8E55FD] bg-[#f5effb] px-2.5 py-1 rounded">
+                      {featuredArticle.tag || featuredArticle.filterCategory || featuredArticle.category}
+                    </span>
+                    <div className="flex items-center gap-1.5 text-xs font-label-mono text-[#7b7486] ml-auto">
+                      <span>{featuredArticle.publishDate}</span>
+                      <span>•</span>
+                      <span>{featuredArticle.readTime}</span>
+                    </div>
                   </div>
                   <h2 className="font-headline-lg font-bold text-2xl sm:text-3xl text-[#1a1c1e] group-hover:text-[#8E55FD] transition-colors mb-4 leading-snug">
                     {featuredArticle.title}
@@ -128,7 +133,7 @@ export const BlogPage: React.FC<BlogPageProps> = () => {
                     {featuredArticle.excerpt}
                   </p>
                 </div>
-                <div className="inline-flex items-center gap-2 font-label-mono text-xs font-bold uppercase tracking-wider text-[#8E55FD] group-hover:text-[#7232E7] transition-colors">
+                <div className="inline-flex items-center gap-2 font-label-mono text-xs font-bold uppercase tracking-wider text-[#8E55FD] group-hover:text-[#7232E7] transition-colors pt-4 border-t border-[#eeedf0]">
                   Read Full Article
                   <span className="material-symbols-outlined text-base icon-slide-right">
                     arrow_forward
@@ -147,26 +152,28 @@ export const BlogPage: React.FC<BlogPageProps> = () => {
               onClick={() => handleArticleClick(article)}
               className="group bg-white rounded-xl border border-[#ccc3d7] overflow-hidden hover:border-[#8E55FD] hover-lift transition-all duration-300 flex flex-col justify-between cursor-pointer shadow-xs"
             >
-              <div className="h-48 sm:h-52 overflow-hidden relative">
+              {/* Image Container - Dedicated, auto-height, preserving natural aspect ratio without cropping */}
+              <div className="w-full overflow-hidden bg-[#faf9fc]">
                 <img
                   src={article.image}
                   alt={article.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 select-none"
+                  className="w-full h-auto block select-none"
                   loading="lazy"
                   decoding="async"
                 />
-                <div className="absolute top-3 left-3">
-                  <span className="font-label-mono text-[11px] font-bold uppercase bg-white/90 backdrop-blur-xs text-[#8E55FD] px-2.5 py-0.5 rounded shadow-2xs">
-                    {article.filterCategory}
-                  </span>
-                </div>
               </div>
-              <div className="p-6 flex-1 flex flex-col justify-between">
+              {/* Content Container - Completely below the image */}
+              <div className="p-6 flex-1 flex flex-col justify-between bg-white">
                 <div>
-                  <div className="flex items-center gap-2 text-[11px] font-label-mono text-[#7b7486] mb-2.5">
-                    <span>{article.publishDate}</span>
-                    <span>•</span>
-                    <span>{article.readTime}</span>
+                  <div className="flex items-center justify-between gap-2 mb-3">
+                    <span className="font-label-mono text-xs font-bold uppercase text-[#8E55FD] bg-[#f5effb] px-2.5 py-1 rounded">
+                      {article.filterCategory || article.tag || article.category}
+                    </span>
+                    <div className="flex items-center gap-1.5 text-xs font-label-mono text-[#7b7486]">
+                      <span>{article.publishDate}</span>
+                      <span>•</span>
+                      <span>{article.readTime}</span>
+                    </div>
                   </div>
                   <h3 className="font-title-md font-bold text-lg text-[#1a1c1e] group-hover:text-[#8E55FD] transition-colors mb-2.5 leading-snug line-clamp-2">
                     {article.title}
@@ -175,8 +182,8 @@ export const BlogPage: React.FC<BlogPageProps> = () => {
                     {article.excerpt}
                   </p>
                 </div>
-                <div className="inline-flex items-center gap-1.5 font-label-mono text-xs font-bold uppercase tracking-wider text-[#8E55FD] group-hover:text-[#7232E7] transition-colors pt-2 border-t border-[#eeedf0]">
-                  Read Guide
+                <div className="inline-flex items-center gap-1.5 font-label-mono text-xs font-bold uppercase tracking-wider text-[#8E55FD] group-hover:text-[#7232E7] transition-colors pt-3 border-t border-[#eeedf0]">
+                  Read Article
                   <span className="material-symbols-outlined text-sm icon-slide-right">
                     arrow_forward
                   </span>

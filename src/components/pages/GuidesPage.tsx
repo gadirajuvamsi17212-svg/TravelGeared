@@ -73,23 +73,31 @@ export const GuidesPage: React.FC<GuidesPageProps> = ({
           {filtered.map((article) => (
             <div
               key={article.id}
-              className="group bg-white rounded-xl border border-[#ccc3d7] overflow-hidden hover-lift shadow-xs cursor-pointer flex flex-col justify-between"
+              className="group bg-white rounded-xl border border-[#ccc3d7] overflow-hidden hover-lift hover:border-[#8E55FD] shadow-xs cursor-pointer flex flex-col justify-between"
               onClick={() => handleArticleClick(article)}
             >
-              <div className="relative h-56 sm:h-64 overflow-hidden bg-black">
+              {/* Image Container - Dedicated and contains ONLY the image */}
+              <div className="w-full h-56 sm:h-64 overflow-hidden bg-[#e3e2e5]">
                 <img
                   src={article.image}
                   alt={article.title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-90"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 select-none block"
+                  loading="lazy"
+                  decoding="async"
                 />
-                <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/30 to-transparent" />
-                <span className="absolute bottom-4 left-4 px-3 py-1 bg-[#8E55FD] text-white font-label-mono text-xs rounded uppercase tracking-wider font-semibold">
-                  {article.tag}
-                </span>
               </div>
 
-              <div className="p-6 flex-1 flex flex-col justify-between">
+              {/* Content Container - Completely below the image */}
+              <div className="p-6 flex-1 flex flex-col justify-between bg-white">
                 <div>
+                  <div className="flex items-center justify-between gap-2 mb-3">
+                    <span className="px-3 py-1 bg-[#f5effb] text-[#8E55FD] font-label-mono text-xs rounded uppercase tracking-wider font-semibold">
+                      {article.tag}
+                    </span>
+                    <span className="text-xs font-label-mono text-[#7b7486]">
+                      {article.readTime}
+                    </span>
+                  </div>
                   <h3 className="font-headline-lg font-bold text-xl text-[#1a1c1e] group-hover:text-[#8E55FD] transition-colors mb-2 leading-snug">
                     {article.title}
                   </h3>
@@ -100,7 +108,12 @@ export const GuidesPage: React.FC<GuidesPageProps> = ({
 
                 <div className="flex items-center justify-between pt-4 border-t border-[#eeedf0] text-xs text-[#7b7486]">
                   <span>By {article.author.name}</span>
-                  <span>{article.readTime}</span>
+                  <div className="inline-flex items-center gap-1 font-label-mono text-xs font-bold uppercase tracking-wider text-[#8E55FD] group-hover:text-[#7232E7] transition-colors">
+                    Read Guide
+                    <span className="material-symbols-outlined text-sm icon-slide-right">
+                      arrow_forward
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>

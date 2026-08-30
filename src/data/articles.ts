@@ -1,6 +1,7 @@
 import { Article } from '../types';
+import { calculateReadingTime } from '../utils/readingTime';
 
-export const ARTICLES: Article[] = [
+const RAW_ARTICLES: Omit<Article, 'readTime'>[] = [
   {
     id: 'art-best-backpacks-2026',
     title: 'Best Backpacks for 2026: Find the Right Bag for Your Next Journey',
@@ -9,11 +10,10 @@ export const ARTICLES: Article[] = [
     category: 'Guide',
     excerpt: 'Backpacks have quietly become one of the most important travel and lifestyle purchases you can make. We break down the 7 best backpacks for 2026 with clear specs and honest details.',
     image: '/Blog Banner Images/Best Backpacks for 2026.png',
-    readTime: '9 min read',
     publishDate: 'Feb 15, 2026',
     author: {
-      name: 'Julian Vance',
-      role: 'Hardware & Luggage Editor',
+      name: 'Vamsi Mohan',
+      role: 'Content Writer',
     },
     featuredProducts: ['prod-nomad-pack', 'prod-modular-cubes'],
     content: `
@@ -174,11 +174,10 @@ Choosing the best backpack for 2026 comes down to understanding how and where yo
     category: 'Review',
     excerpt: 'Keep your cables, chargers, and drives perfectly sorted with our top picks for digital nomads.',
     image: '/tech-organizers.jpg',
-    readTime: '6 min read',
     publishDate: 'Aug 14, 2024',
     author: {
-      name: 'Julian Vance',
-      role: 'Hardware & EDC Editor',
+      name: 'Vamsi Mohan',
+      role: 'Content Writer',
     },
     featuredProducts: ['prod-modular-cubes', 'prod-gan-charger'],
     content: `
@@ -200,11 +199,10 @@ Our highest-rated recommendation remains the modular compression tech pouch with
     category: 'Strategy',
     excerpt: 'How to pack efficiently for a week (or a month) using only a single carry-on backpack.',
     image: '/one-bag-life.jpg',
-    readTime: '8 min read',
     publishDate: 'Aug 10, 2024',
     author: {
-      name: 'Elena Rostova',
-      role: 'Ultralight Travel Specialist',
+      name: 'Vamsi Mohan',
+      role: 'Content Writer',
     },
     featuredProducts: ['prod-nomad-pack', 'prod-modular-cubes'],
     content: `
@@ -227,11 +225,10 @@ By prioritizing lightweight, high-performance materials, you can travel indefini
     category: 'Guide',
     excerpt: 'Polycarbonate vs. Aluminum vs. Ballistic Nylon: finding the perfect balance between weight and indestructibility.',
     image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBEhuji4iTj31MAN8-pU5JJn7Z4pRNrnV_5KdiJB4hDm7BcVsFPoCKMmYQGDZAyeoZH4uZ7A9Bd4xtFPStUhARD4eIQmtEGIg35TeWDzMKnWqpmsBTOws4k-hKeLG9Av4pl7wUPPcAtBbEVHHqdc5KH3qC9qb5P1XyW-zDcTiui-t3ed5iCqWWhVfErWGUEuP-o60E88sVmCC7k3a2ydbUSzcX9HBJi6hQ8QxCpFyws1fg_oNSHMo33dg',
-    readTime: '10 min read',
     publishDate: 'Aug 02, 2024',
     author: {
-      name: 'Julian Vance',
-      role: 'Hardware & EDC Editor',
+      name: 'Vamsi Mohan',
+      role: 'Content Writer',
     },
     featuredProducts: ['prod-aero-carryon'],
     content: `
@@ -246,11 +243,10 @@ Choosing the right carry-on suitcase requires balancing airline dimensional cons
     category: 'Review',
     excerpt: 'We measured cabin low-frequency engine hum attenuation across 10 top wireless ANC headphones.',
     image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAf_ctcpCwAU52PUjrqscuAfi6eFQhSAGhqsUj5sOs11ZJZV03LVi8A9q6byfs8OgETjUYBH1IQqNKzgtgTTCFJi3L9aXDElZ12XBsIBK2t07UZt-qx7OLL4Za0duCKUqqMg9RQ0U6iUaH8a0VegLG9aB4KoXKveR_3fwUbK8Yw_m1UcPPzJ3VGBNeJ21SQKeNTFwh3Rv_yanuQAtZe-dRZOowqc_bcoGVkQDEbtTQfqB0KbpmwIn5zhA',
-    readTime: '7 min read',
     publishDate: 'Jul 28, 2024',
     author: {
-      name: 'Julian Vance',
-      role: 'Hardware & EDC Editor',
+      name: 'Vamsi Mohan',
+      role: 'Content Writer',
     },
     featuredProducts: ['prod-sonic-anc'],
     content: `
@@ -258,3 +254,8 @@ Active Noise Cancellation technology has revolutionized long-haul air travel. We
     `,
   },
 ];
+
+export const ARTICLES: Article[] = RAW_ARTICLES.map((article) => ({
+  ...article,
+  readTime: calculateReadingTime(article.content),
+}));

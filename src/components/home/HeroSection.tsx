@@ -34,7 +34,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
         {/* Desktop & Tablet Background Image */}
         <img
           alt="Modern traveler in an airport terminal with purple ambient lighting"
-          className="w-full h-full object-cover md:object-[68%_38%] hidden md:block select-none"
+          className="w-full h-[780px] object-cover md:object-[68%_38%] hidden md:block select-none"
+          style={{ height: '780px' }}
           src={SITE_CONFIG.heroBgUrl}
           loading="eager"
           decoding="async"
