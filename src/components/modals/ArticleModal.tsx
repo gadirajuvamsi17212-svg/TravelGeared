@@ -217,6 +217,20 @@ export const ArticleModal: React.FC<ArticleModalProps> = ({
             </ReactMarkdown>
           </div>
 
+          {/* Article Tags */}
+          {article.tags && article.tags.length > 0 && (
+            <div className="mt-8 pt-6 border-t border-[#eeedf0] flex flex-wrap items-center gap-2.5">
+              {article.tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="inline-flex items-center px-3 py-1 font-label-mono text-xs font-semibold rounded-md uppercase tracking-wider bg-[#f5effb] text-[#8E55FD] border border-[#e5d5fb] shadow-2xs"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          )}
+
           {/* Featured Gear In This Guide */}
           {relatedProducts.length > 0 && (
             <div className="mt-10 pt-6 border-t border-[#eeedf0]">

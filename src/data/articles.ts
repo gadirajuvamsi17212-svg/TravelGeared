@@ -16,6 +16,7 @@ const RAW_ARTICLES: Omit<Article, 'readTime'>[] = [
       role: 'Content Writer',
     },
     featuredProducts: ['prod-nomad-pack', 'prod-modular-cubes'],
+    tags: ['USA', 'Amazon'],
     content: `
 Backpacks have quietly become one of the most important travel and lifestyle purchases you can make. What used to be a simple bag for books and gym clothes is now expected to double as a carry-on travel backpack, a laptop backpack for the office, a school backpack for daily commutes, and a durable everyday bag that can survive years of use. As remote work, weekend travel, and minimalist packing continue to shape how people move through their day, the demand for a versatile, water-resistant, and well-organized backpack has never been higher.
 

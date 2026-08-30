@@ -60,6 +60,7 @@ export interface Article {
     avatar?: string;
   };
   featuredProducts?: string[]; // Product IDs
+  tags?: string[];
 }
 
 export interface SiteNavigationItem {
