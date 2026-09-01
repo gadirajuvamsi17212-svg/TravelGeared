@@ -79,11 +79,11 @@ export const GuidesPage: React.FC<GuidesPageProps> = ({
               onClick={() => handleArticleClick(article)}
             >
               {/* Image Container - Dedicated and contains ONLY the image */}
-              <div className="w-full h-56 sm:h-64 overflow-hidden bg-[#e3e2e5]">
+              <div className="w-full h-auto md:h-56 lg:h-64 overflow-hidden bg-[#e3e2e5]">
                 <img
                   src={article.image}
                   alt={article.title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 select-none block"
+                  className="w-full h-auto md:h-full object-contain md:object-cover transition-transform duration-700 group-hover:scale-105 select-none block"
                   loading="lazy"
                   decoding="async"
                 />
