@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Category, Product, PageRoute } from '../../types';
 import { CATEGORIES } from '../../data/categories';
 import { PRODUCTS } from '../../data/products';
+import { useMetaRobots } from '../../hooks/useMetaRobots';
 
 interface CategoryPageProps {
   categorySlug?: string;
@@ -18,6 +19,7 @@ export const CategoryPage: React.FC<CategoryPageProps> = ({
   savedProductIds = [],
   onToggleSave,
 }) => {
+  useMetaRobots('noindex, follow');
   const [selectedSort, setSelectedSort] = useState<'featured' | 'price-low' | 'price-high' | 'rating'>('featured');
 
   const currentCategory: Category =

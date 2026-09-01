@@ -6,6 +6,7 @@ import { BLOG_ARTICLES } from '../../data/blogArticles';
 import { ARTICLES } from '../../data/articles';
 import { PRODUCTS } from '../../data/products';
 import { Product } from '../../types';
+import { useMetaRobots } from '../../hooks/useMetaRobots';
 
 interface BlogDetailPageProps {
   onSelectProduct?: (product: Product) => void;
@@ -18,6 +19,15 @@ export const BlogDetailPage: React.FC<BlogDetailPageProps> = ({ onSelectProduct 
   const article =
     BLOG_ARTICLES.find((a) => a.slug === slug || a.id === slug) ||
     ARTICLES.find((a) => a.slug === slug || a.id === slug);
+
+  // Only /blog/best-backpacks-for-2026 is indexable; all temporary blog articles receive noindex, follow
+  const isApprovedArticle =
+    slug === 'best-backpacks-for-2026' ||
+    article?.slug === 'best-backpacks-for-2026' ||
+    article?.id === 'art-best-backpacks-2026' ||
+    article?.id === 'blog-best-backpacks-2026';
+
+  useMetaRobots(isApprovedArticle ? 'index, follow' : 'noindex, follow');
 
   if (!article) {
     return (

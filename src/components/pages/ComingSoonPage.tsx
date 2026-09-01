@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useMetaRobots } from '../../hooks/useMetaRobots';
 
 interface ComingSoonPageProps {
   contextTitle?: string;
 }
 
 export const ComingSoonPage: React.FC<ComingSoonPageProps> = ({ contextTitle }) => {
+  useMetaRobots('noindex, follow');
   const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
 

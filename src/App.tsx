@@ -16,9 +16,13 @@ import { ArticleModal } from './components/modals/ArticleModal';
 import { AccountModal } from './components/modals/AccountModal';
 import { Product, Article, Category } from './types';
 import { SITE_CONFIG } from './data/siteConfig';
+import { useMetaRobots } from './hooks/useMetaRobots';
 
 export default function App() {
   const navigate = useNavigate();
+
+  // Manage SEO meta robots directive across routes
+  useMetaRobots();
 
   // Modals state
   const [searchOpen, setSearchOpen] = useState(false);

@@ -1,12 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { AFFILIATE_DISCLOSURE_FULL } from '../../data/affiliate';
+import { useMetaRobots } from '../../hooks/useMetaRobots';
 
 interface LegalPageProps {
   type: 'privacy' | 'terms';
 }
 
 export const LegalPage: React.FC<LegalPageProps> = ({ type }) => {
+  useMetaRobots('noindex, follow');
   const isPrivacy = type === 'privacy';
 
   return (

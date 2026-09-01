@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ARTICLES } from '../../data/articles';
 import { Article, PageRoute } from '../../types';
+import { useMetaRobots } from '../../hooks/useMetaRobots';
 
 interface GuidesPageProps {
   onSelectArticle?: (article: Article) => void;
@@ -11,6 +12,7 @@ interface GuidesPageProps {
 export const GuidesPage: React.FC<GuidesPageProps> = ({
   onNavigate,
 }) => {
+  useMetaRobots('noindex, follow');
   const [selectedFilter, setSelectedFilter] = useState<'all' | 'Guide' | 'Review' | 'Strategy'>('all');
   const navigate = useNavigate();
 
