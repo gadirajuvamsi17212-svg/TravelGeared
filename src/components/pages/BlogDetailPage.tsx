@@ -16,9 +16,20 @@ export const BlogDetailPage: React.FC<BlogDetailPageProps> = ({ onSelectProduct 
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
 
+  const normalizedSlug = slug ? slug.replace(/^7-/, '') : '';
   const article =
-    BLOG_ARTICLES.find((a) => a.slug === slug || a.id === slug) ||
-    ARTICLES.find((a) => a.slug === slug || a.id === slug);
+    BLOG_ARTICLES.find(
+      (a) =>
+        a.slug === slug ||
+        a.id === slug ||
+        (normalizedSlug && (a.slug === normalizedSlug || a.slug.replace(/^7-/, '') === normalizedSlug))
+    ) ||
+    ARTICLES.find(
+      (a) =>
+        a.slug === slug ||
+        a.id === slug ||
+        (normalizedSlug && (a.slug === normalizedSlug || a.slug.replace(/^7-/, '') === normalizedSlug))
+    );
 
   // Only /blog/best-backpacks-for-2026 is indexable; all temporary blog articles receive noindex, follow
   const isApprovedArticle =
