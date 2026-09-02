@@ -27,6 +27,11 @@ export const GuidesSection: React.FC<GuidesSectionProps> = () => {
       {/* Articles Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
         {featuredArticles.map((article) => {
+          const isTargetCard =
+            article.slug === '7-best-portable-bluetooth-speakers-for-travel-2026' ||
+            article.id === 'art-best-bluetooth-speakers-travel-2026' ||
+            article.id === 'blog-best-bluetooth-speakers-travel-2026';
+
           return (
             <div
               key={article.id}
@@ -37,11 +42,18 @@ export const GuidesSection: React.FC<GuidesSectionProps> = () => {
               }}
             >
               {/* Image Container - Dedicated and contains ONLY the image */}
-              <div className="w-full h-auto md:h-[296px] overflow-hidden bg-[#e3e2e5]">
+              <div className={`w-full overflow-hidden bg-[#e3e2e5] ${isTargetCard ? 'h-[338px] md:h-[338px]' : 'h-auto md:h-[296px]'}`}>
                 <img
                   src={article.image}
                   alt={article.title}
-                  className="w-full h-auto md:h-[296px] object-contain md:object-cover transition-transform duration-700 group-hover:scale-105 select-none block"
+                  className={`w-full object-contain md:object-cover transition-transform duration-700 group-hover:scale-105 select-none block ${
+                    isTargetCard ? 'h-[338px] mt-0' : 'h-auto md:h-[296px]'
+                  }`}
+                  style={
+                    isTargetCard
+                      ? { height: '338px', marginTop: '0px' }
+                      : undefined
+                  }
                   loading="eager"
                   decoding="async"
                   onError={(e) => {
