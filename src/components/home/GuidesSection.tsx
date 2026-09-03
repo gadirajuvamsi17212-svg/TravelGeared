@@ -43,18 +43,22 @@ export const GuidesSection: React.FC<GuidesSectionProps> = () => {
             >
               {/* Image Container - Dedicated and contains ONLY the image */}
               <div
-                className={`w-full overflow-hidden bg-[#e3e2e5] ${isTargetCard ? 'h-[220px]' : 'h-auto md:h-[296px]'}`}
-                style={isTargetCard ? { height: '220px' } : undefined}
+                className={`overflow-hidden bg-[#e3e2e5] flex items-center justify-center mx-auto ${isTargetCard ? '' : 'w-full h-auto md:h-[296px]'}`}
+                style={
+                  isTargetCard
+                    ? { height: '218px', width: '330.24px', maxWidth: '100%' }
+                    : undefined
+                }
               >
                 <img
                   src={article.image}
                   alt={article.title}
-                  className={`w-full object-contain md:object-cover transition-transform duration-700 group-hover:scale-105 select-none block ${
-                    isTargetCard ? 'h-[220px]' : 'h-auto md:h-[296px]'
+                  className={`object-contain md:object-cover transition-transform duration-700 group-hover:scale-105 select-none block ${
+                    isTargetCard ? '' : 'w-full h-auto md:h-[296px]'
                   }`}
                   style={
                     isTargetCard
-                      ? { height: '220px' }
+                      ? { height: '222px', width: '333.24px', maxWidth: 'none' }
                       : undefined
                   }
                   loading="eager"
@@ -71,7 +75,14 @@ export const GuidesSection: React.FC<GuidesSectionProps> = () => {
               </div>
 
               {/* Content Container - Completely below the image */}
-              <div className="p-6 flex-1 flex flex-col justify-between bg-white">
+              <div
+                className="p-6 flex-1 flex flex-col justify-between bg-white"
+                style={
+                  isTargetCard
+                    ? { height: '240px', width: 'min(561.4px, 100%)' }
+                    : undefined
+                }
+              >
                 <div>
                   <div className="flex items-center justify-between gap-2 mb-3">
                     <span className="inline-block px-3 py-1 font-label-mono text-xs font-semibold rounded uppercase tracking-wider bg-[#f5effb] text-[#8E55FD]">
