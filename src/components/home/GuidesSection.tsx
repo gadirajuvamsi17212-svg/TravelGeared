@@ -45,17 +45,17 @@ export const GuidesSection: React.FC<GuidesSectionProps> = () => {
               <div
                 className={`overflow-hidden bg-[#e3e2e5] ${
                   isTargetCard
-                    ? 'w-[330.24px] max-w-full h-[218px] mx-auto flex items-center justify-center md:w-full md:h-[296px] md:max-w-none md:block'
+                    ? 'w-[330.24px] max-w-full h-[218px] mx-auto flex items-center justify-center md:w-full md:h-auto md:max-w-none md:block'
                     : 'w-full h-auto md:h-[296px]'
                 }`}
               >
                 <img
                   src={article.image}
                   alt={article.title}
-                  className={`transition-transform duration-700 group-hover:scale-105 select-none block ${
+                  className={`select-none block ${
                     isTargetCard
-                      ? 'w-[333.24px] h-[222px] max-w-none object-contain md:w-full md:h-[296px] md:max-w-full md:object-cover'
-                      : 'w-full h-auto md:h-[296px] object-contain md:object-cover'
+                      ? 'w-[333.24px] h-[222px] max-w-none object-contain md:w-full md:h-auto md:max-w-full md:object-contain'
+                      : 'w-full h-auto md:h-[296px] object-contain md:object-cover transition-transform duration-700 group-hover:scale-105'
                   }`}
                   loading="eager"
                   decoding="async"
