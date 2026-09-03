@@ -43,24 +43,20 @@ export const GuidesSection: React.FC<GuidesSectionProps> = () => {
             >
               {/* Image Container - Dedicated and contains ONLY the image */}
               <div
-                className={`overflow-hidden bg-[#e3e2e5] flex items-center justify-center mx-auto ${isTargetCard ? '' : 'w-full h-auto md:h-[296px]'}`}
-                style={
+                className={`overflow-hidden bg-[#e3e2e5] ${
                   isTargetCard
-                    ? { height: '218px', width: '330.24px', maxWidth: '100%' }
-                    : undefined
-                }
+                    ? 'w-[330.24px] max-w-full h-[218px] mx-auto flex items-center justify-center md:w-full md:h-[296px] md:max-w-none md:block'
+                    : 'w-full h-auto md:h-[296px]'
+                }`}
               >
                 <img
                   src={article.image}
                   alt={article.title}
-                  className={`object-contain md:object-cover transition-transform duration-700 group-hover:scale-105 select-none block ${
-                    isTargetCard ? '' : 'w-full h-auto md:h-[296px]'
-                  }`}
-                  style={
+                  className={`transition-transform duration-700 group-hover:scale-105 select-none block ${
                     isTargetCard
-                      ? { height: '222px', width: '333.24px', maxWidth: 'none' }
-                      : undefined
-                  }
+                      ? 'w-[333.24px] h-[222px] max-w-none object-contain md:w-full md:h-[296px] md:max-w-full md:object-cover'
+                      : 'w-full h-auto md:h-[296px] object-contain md:object-cover'
+                  }`}
                   loading="eager"
                   decoding="async"
                   onError={(e) => {
@@ -76,12 +72,9 @@ export const GuidesSection: React.FC<GuidesSectionProps> = () => {
 
               {/* Content Container - Completely below the image */}
               <div
-                className="p-6 flex-1 flex flex-col justify-between bg-white"
-                style={
-                  isTargetCard
-                    ? { height: '240px', width: 'min(561.4px, 100%)' }
-                    : undefined
-                }
+                className={`p-6 flex-1 flex flex-col justify-between bg-white ${
+                  isTargetCard ? 'max-md:h-[240px] md:h-auto' : ''
+                }`}
               >
                 <div>
                   <div className="flex items-center justify-between gap-2 mb-3">
