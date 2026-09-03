@@ -42,16 +42,19 @@ export const GuidesSection: React.FC<GuidesSectionProps> = () => {
               }}
             >
               {/* Image Container - Dedicated and contains ONLY the image */}
-              <div className={`w-full overflow-hidden bg-[#e3e2e5] ${isTargetCard ? 'h-[338px] md:h-[338px]' : 'h-auto md:h-[296px]'}`}>
+              <div
+                className={`w-full overflow-hidden bg-[#e3e2e5] ${isTargetCard ? 'h-[220px]' : 'h-auto md:h-[296px]'}`}
+                style={isTargetCard ? { height: '220px' } : undefined}
+              >
                 <img
                   src={article.image}
                   alt={article.title}
                   className={`w-full object-contain md:object-cover transition-transform duration-700 group-hover:scale-105 select-none block ${
-                    isTargetCard ? 'h-[338px] mt-0' : 'h-auto md:h-[296px]'
+                    isTargetCard ? 'h-[220px]' : 'h-auto md:h-[296px]'
                   }`}
                   style={
                     isTargetCard
-                      ? { height: '338px', marginTop: '0px' }
+                      ? { height: '220px' }
                       : undefined
                   }
                   loading="eager"
