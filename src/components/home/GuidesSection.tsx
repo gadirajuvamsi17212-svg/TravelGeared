@@ -10,7 +10,10 @@ interface GuidesSectionProps {
 
 export const GuidesSection: React.FC<GuidesSectionProps> = () => {
   const navigate = useNavigate();
-  const featuredArticles = ARTICLES.slice(0, 2);
+  // Sort articles by publishDate descending to ensure the latest blog article appears first
+  const featuredArticles = [...ARTICLES]
+    .sort((a, b) => new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime())
+    .slice(0, 2);
 
   return (
     <section className="w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-12 lg:px-16 py-12 md:py-20 lg:py-24" id="guides">
