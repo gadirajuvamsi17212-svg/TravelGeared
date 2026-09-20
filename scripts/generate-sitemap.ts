@@ -23,6 +23,7 @@ const rootDir = path.resolve(__dirname, '..');
  */
 export const publishedBlogSlugs: string[] = [
   'best-backpacks-for-2026',
+  'best-travel-tips-for-2026',
 ];
 
 interface SitemapEntry {
