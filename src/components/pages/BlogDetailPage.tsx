@@ -44,7 +44,11 @@ export const BlogDetailPage: React.FC<BlogDetailPageProps> = ({ onSelectProduct 
     slug === 'best-travel-tips-for-2026' ||
     article?.slug === 'best-travel-tips-for-2026' ||
     article?.id === 'art-best-travel-tips-2026' ||
-    article?.id === 'blog-best-travel-tips-2026';
+    article?.id === 'blog-best-travel-tips-2026' ||
+    slug === 'forex-card-guide-2026' ||
+    article?.slug === 'forex-card-guide-2026' ||
+    article?.id === 'art-forex-card-guide-2026' ||
+    article?.id === 'blog-forex-card-guide-2026';
 
   useMetaRobots(isApprovedArticle ? 'index, follow' : 'noindex, follow');
 

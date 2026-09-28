@@ -38,7 +38,10 @@ export const GuidesSection: React.FC<GuidesSectionProps> = () => {
           const isTravelTipsCard =
             article.slug === 'best-travel-tips-for-2026' ||
             article.id === 'art-best-travel-tips-2026' ||
-            article.id === 'blog-best-travel-tips-2026';
+            article.id === 'blog-best-travel-tips-2026' ||
+            article.slug === 'forex-card-guide-2026' ||
+            article.id === 'art-forex-card-guide-2026' ||
+            article.id === 'blog-forex-card-guide-2026';
 
           return (
             <div
