@@ -35,6 +35,11 @@ export const GuidesSection: React.FC<GuidesSectionProps> = () => {
             article.id === 'art-best-bluetooth-speakers-travel-2026' ||
             article.id === 'blog-best-bluetooth-speakers-travel-2026';
 
+          const isTravelTipsCard =
+            article.slug === 'best-travel-tips-for-2026' ||
+            article.id === 'art-best-travel-tips-2026' ||
+            article.id === 'blog-best-travel-tips-2026';
+
           return (
             <div
               key={article.id}
@@ -49,6 +54,8 @@ export const GuidesSection: React.FC<GuidesSectionProps> = () => {
                 className={`overflow-hidden bg-[#e3e2e5] ${
                   isTargetCard
                     ? 'w-[330.24px] max-w-full h-[218px] mx-auto flex items-center justify-center md:w-full md:h-auto md:max-w-none md:block'
+                    : isTravelTipsCard
+                    ? 'w-full h-auto md:w-full md:h-auto md:max-w-none md:block'
                     : 'w-full h-auto md:h-[296px]'
                 }`}
               >
@@ -58,6 +65,8 @@ export const GuidesSection: React.FC<GuidesSectionProps> = () => {
                   className={`select-none block ${
                     isTargetCard
                       ? 'w-[333.24px] h-[222px] max-w-none object-contain md:w-full md:h-auto md:max-w-full md:object-contain'
+                      : isTravelTipsCard
+                      ? 'w-full h-auto object-contain md:w-full md:h-auto md:max-w-full md:object-contain'
                       : 'w-full h-auto md:h-[296px] object-contain md:object-cover transition-transform duration-700 group-hover:scale-105'
                   }`}
                   loading="eager"
