@@ -1,18 +1,34 @@
 import React from 'react';
 import { HeroSection } from './HeroSection';
 import { CategoriesBento } from './CategoriesBento';
-import { GuidesSection } from './GuidesSection';
 import { TopRatedGear } from './TopRatedGear';
+import { GuidesSection } from './GuidesSection';
 import { NewsletterSection } from './NewsletterSection';
+import { Product, Article } from '../../types';
 
-export const HomePage: React.FC = () => {
+interface HomePageProps {
+  onSelectProduct: (product: Product) => void;
+  onSelectArticle?: (article: Article) => void;
+  savedProductIds: string[];
+  onToggleSave: (productId: string) => void;
+}
+
+export const HomePage: React.FC<HomePageProps> = ({
+  onSelectProduct,
+  savedProductIds,
+  onToggleSave,
+}) => {
   return (
-    <main className="w-full">
+    <>
       <HeroSection />
       <CategoriesBento />
+      <TopRatedGear
+        onSelectProduct={onSelectProduct}
+        savedProductIds={savedProductIds}
+        onToggleSave={onToggleSave}
+      />
       <GuidesSection />
-      <TopRatedGear />
       <NewsletterSection />
-    </main>
+    </>
   );
 };

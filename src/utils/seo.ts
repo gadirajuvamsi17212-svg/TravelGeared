@@ -12,22 +12,23 @@ export const APPROVED_INDEXABLE_PATHS = [
   '/blog/7-best-portable-bluetooth-speakers-for-travel-2026',
   '/blog/best-travel-tips-for-2026',
   '/blog/forex-card-guide-2026',
-  '/blog/how-to-make-money-while-traveling-2026',
 ];
 
 export function isApprovedIndexablePath(pathname: string): boolean {
   if (!pathname) return false;
+  // Normalize path by removing trailing slash (except root) and lowercase
   const cleanPath = pathname.toLowerCase().replace(/\/+$/, '') || '/';
   return APPROVED_INDEXABLE_PATHS.includes(cleanPath);
 }
 
 export function setRobotsMeta(directive: 'index, follow' | 'noindex, follow') {
   if (typeof document === 'undefined') return;
-  let metaTag = document.querySelector('meta[name="robots"]');
-  if (!metaTag) {
-    metaTag = document.createElement('meta');
-    metaTag.setAttribute('name', 'robots');
-    document.head.appendChild(metaTag);
+
+  let meta = document.querySelector('meta[name="robots"]') as HTMLMetaElement | null;
+  if (!meta) {
+    meta = document.createElement('meta');
+    meta.setAttribute('name', 'robots');
+    document.head.appendChild(meta);
   }
-  metaTag.setAttribute('content', directive);
+  meta.setAttribute('content', directive);
 }
