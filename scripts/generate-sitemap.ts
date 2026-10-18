@@ -21,6 +21,7 @@ export const publishedBlogSlugs: string[] = [
   '7-best-portable-bluetooth-speakers-for-travel-2026',
   'best-travel-tips-for-2026',
   'forex-card-guide-2026',
+  'how-to-make-money-while-traveling-in-2026',
 ];
 
 interface SitemapEntry {

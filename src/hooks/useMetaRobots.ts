@@ -1,21 +1,25 @@
 import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
-import { isApprovedIndexablePath, setRobotsMeta } from '../utils/seo';
 
-/**
- * Custom React hook that sets the <meta name="robots" content="..." /> tag.
- * If a custom directive is passed, it uses that; otherwise it checks whether the current URL path
- * is one of the 5 approved indexable URLs.
- */
-export function useMetaRobots(customDirective?: 'index, follow' | 'noindex, follow') {
-  const location = useLocation();
-
+export const useMetaRobots = (content: string) => {
   useEffect(() => {
-    if (customDirective) {
-      setRobotsMeta(customDirective);
-    } else {
-      const isIndexable = isApprovedIndexablePath(location.pathname);
-      setRobotsMeta(isIndexable ? 'index, follow' : 'noindex, follow');
+    let meta = document.querySelector('meta[name="robots"]') as HTMLMetaElement | null;
+    const previousContent = meta ? meta.getAttribute('content') : null;
+
+    if (!meta) {
+      meta = document.createElement('meta');
+      meta.name = 'robots';
+      document.head.appendChild(meta);
     }
-  }, [location.pathname, customDirective]);
-}
+    meta.setAttribute('content', content);
+
+    return () => {
+      if (meta) {
+        if (previousContent) {
+          meta.setAttribute('content', previousContent);
+        } else {
+          meta.setAttribute('content', 'index, follow');
+        }
+      }
+    };
+  }, [content]);
+};

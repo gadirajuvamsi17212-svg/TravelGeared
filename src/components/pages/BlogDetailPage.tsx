@@ -48,7 +48,11 @@ export const BlogDetailPage: React.FC<BlogDetailPageProps> = ({ onSelectProduct 
     slug === 'forex-card-guide-2026' ||
     article?.slug === 'forex-card-guide-2026' ||
     article?.id === 'art-forex-card-guide-2026' ||
-    article?.id === 'blog-forex-card-guide-2026';
+    article?.id === 'blog-forex-card-guide-2026' ||
+    slug === 'how-to-make-money-while-traveling-in-2026' ||
+    article?.slug === 'how-to-make-money-while-traveling-in-2026' ||
+    article?.id === 'art-how-to-make-money-while-traveling-2026' ||
+    article?.id === 'blog-how-to-make-money-while-traveling-2026';
 
   useMetaRobots(isApprovedArticle ? 'index, follow' : 'noindex, follow');
 
