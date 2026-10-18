@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import { Product } from '../../types';
 import { AFFILIATE_DISCLOSURE_SHORT } from '../../data/affiliate';
 
-interface ProductQuickViewModalProps {
+export interface ProductQuickViewModalProps {
   product: Product | null;
   isOpen: boolean;
   onClose: () => void;
   isSaved?: boolean;
   onToggleSave?: (productId: string) => void;
 }
+export type ProductModalProps = ProductQuickViewModalProps;
 
 export const ProductQuickViewModal: React.FC<ProductQuickViewModalProps> = ({
   product,
