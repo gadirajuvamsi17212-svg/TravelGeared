@@ -3,6 +3,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { BLOG_ARTICLES } from '../src/data/blogArticles';
 import { SITE_CONFIG } from '../src/data/siteConfig';
+import { APPROVED_INDEXABLE_PATHS } from '../src/utils/seo';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -14,16 +15,12 @@ const rootDir = path.resolve(__dirname, '..');
  * Add published blog slugs to this array when you are ready to have them indexed.
  * When an article slug is added here, the sitemap generator will automatically
  * include `https://travelgeared.com/blog/<slug>` with its publication date.
- *
- * Example:
- * export const publishedBlogSlugs: string[] = [
- *   'best-travel-backpacks',
- *   'minimalist-travel-gear',
- * ];
  */
 export const publishedBlogSlugs: string[] = [
   'best-backpacks-for-2026',
+  '7-best-portable-bluetooth-speakers-for-travel-2026',
   'best-travel-tips-for-2026',
+  'forex-card-guide-2026',
 ];
 
 interface SitemapEntry {
@@ -88,9 +85,15 @@ export function generateSitemapXml(): string {
     lastmod: currentDate,
   });
 
-  // 2. Controlled Published Blog Articles (Added via publishedBlogSlugs array)
-  if (Array.isArray(publishedBlogSlugs) && publishedBlogSlugs.length > 0) {
-    for (const rawSlug of publishedBlogSlugs) {
+  // 2. Controlled Published Blog Articles (From publishedBlogSlugs & APPROVED_INDEXABLE_PATHS)
+  const approvedBlogSlugs = (APPROVED_INDEXABLE_PATHS || [])
+    .filter((p) => p.startsWith('/blog/'))
+    .map((p) => p.replace('/blog/', '').trim());
+
+  const allSlugs = Array.from(new Set([...publishedBlogSlugs, ...approvedBlogSlugs]));
+
+  if (allSlugs.length > 0) {
+    for (const rawSlug of allSlugs) {
       if (typeof rawSlug === 'string' && rawSlug.trim()) {
         const cleanSlug = rawSlug.trim().replace(/^\/+|\/+$/g, '');
         if (cleanSlug) {
