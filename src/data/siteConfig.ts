@@ -20,7 +20,7 @@ export const SITE_CONFIG = {
   socials: {
     linkedin: 'https://linkedin.com/company/travelgeared',
     instagram: 'https://www.instagram.com/travelgearedofficial/',
-    facebook: 'https://facebook.com/travelgeared',
+    facebook: 'https://www.facebook.com/profile.php?id=61595220347486',
   },
 
   affiliateDisclosure: 'TravelGeared is supported by our readers. When you buy through links on our site, we may earn an affiliate commission at no additional cost to you.',
