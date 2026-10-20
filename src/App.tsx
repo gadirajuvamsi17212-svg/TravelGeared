@@ -11,7 +11,7 @@ import { BlogDetailPage } from './components/pages/BlogDetailPage';
 import { LegalPage } from './components/pages/LegalPage';
 import { ComingSoonPage } from './components/pages/ComingSoonPage';
 import { SearchModal } from './components/modals/SearchModal';
-import { ProductQuickViewModal as ProductModal } from './components/modals/ProductQuickViewModal';
+import { ProductQuickViewModal } from './components/modals/ProductQuickViewModal';
 import { ArticleModal } from './components/modals/ArticleModal';
 import { AccountModal } from './components/modals/AccountModal';
 import { Product, Article, Category } from './types';
@@ -147,7 +147,7 @@ export default function App() {
         onSelectCategory={(cat) => navigate(`/category/${cat.slug}`)}
       />
 
-      <ProductModal
+      <ProductQuickViewModal
         product={selectedProduct}
         isOpen={!!selectedProduct}
         onClose={() => setSelectedProduct(null)}

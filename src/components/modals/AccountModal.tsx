@@ -1,5 +1,4 @@
 import React from 'react';
-import { X, Bookmark, Trash2, ExternalLink } from 'lucide-react';
 import { PRODUCTS } from '../../data/products';
 import { Product } from '../../types';
 
@@ -22,9 +21,7 @@ export const AccountModal: React.FC<AccountModalProps> = ({
 }) => {
   if (!isOpen) return null;
 
-  const savedProducts = savedProductIds
-    .map((id) => PRODUCTS.find((p) => p.id === id))
-    .filter(Boolean) as Product[];
+  const savedProducts = PRODUCTS.filter((p) => savedProductIds.includes(p.id));
 
   return (
     <div
@@ -32,86 +29,89 @@ export const AccountModal: React.FC<AccountModalProps> = ({
       onClick={onClose}
     >
       <div
-        className="w-full max-w-lg bg-white rounded-2xl shadow-2xl border border-[#ccc3d7] overflow-hidden flex flex-col max-h-[85vh] text-[#1a1c1e]"
+        className="w-full max-w-lg bg-white rounded-xl shadow-2xl border border-[#ccc3d7] overflow-hidden flex flex-col max-h-[85vh] text-[#1a1c1e]"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-[#ccc3d7]/40">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-[#eeedf0] bg-[#faf9fc]">
           <div className="flex items-center gap-2">
-            <Bookmark className="w-5 h-5 text-[#8E55FD] fill-current" />
-            <h3 className="font-bold text-lg text-[#1a1c1e]">Saved Travel Gear</h3>
-            <span className="text-xs bg-[#f2eff6] text-[#8E55FD] font-bold px-2 py-0.5 rounded-full">
+            <span className="material-symbols-outlined text-[#8E55FD]">favorite</span>
+            <h3 className="font-headline-lg font-bold text-lg text-[#1a1c1e]">
+              Saved Travel Equipment
+            </h3>
+            <span className="bg-[#eaddff] text-[#8E55FD] text-xs px-2 py-0.5 rounded-full font-label-mono font-bold">
               {savedProducts.length}
             </span>
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 text-[#7b7486] hover:text-[#1a1c1e] hover:bg-[#f2eff6] rounded-full transition-colors cursor-pointer"
+            className="p-1 rounded-full text-[#7b7486] hover:text-[#1a1c1e]"
+            aria-label="Close modal"
           >
-            <X className="w-5 h-5" />
+            <span className="material-symbols-outlined">close</span>
           </button>
         </div>
 
         {/* Content */}
-        <div className="flex-1 overflow-y-auto p-6 space-y-4">
+        <div className="p-6 overflow-y-auto divide-y divide-[#eeedf0]">
           {savedProducts.length === 0 ? (
             <div className="text-center py-12 text-[#7b7486]">
-              <Bookmark className="w-10 h-10 mx-auto text-[#ccc3d7] mb-3" />
-              <p className="font-medium text-sm text-[#1a1c1e] mb-1">
-                Your wishlist is empty
-              </p>
-              <p className="text-xs">
-                Save gear you love by tapping the bookmark icon on any item.
+              <span className="material-symbols-outlined text-4xl mb-2 text-[#ccc3d7]">
+                bookmark_border
+              </span>
+              <h4 className="font-title-md text-base text-[#1a1c1e] mb-1">No items saved yet</h4>
+              <p className="font-body-md text-xs max-w-xs mx-auto">
+                Click the heart icon on any gear card to save items for future comparisons and price tracking.
               </p>
             </div>
           ) : (
-            <div className="space-y-3">
+            <div className="space-y-3 pt-1">
               {savedProducts.map((product) => (
                 <div
                   key={product.id}
-                  className="flex items-center justify-between p-3 rounded-xl border border-[#ccc3d7]/50 hover:border-[#8E55FD]/50 bg-white transition-all"
+                  className="flex items-center justify-between gap-3 p-3 rounded-lg hover:bg-[#faf9fc] border border-transparent hover:border-[#eeedf0] transition-all"
                 >
-                  <div
+                  <img
+                    src={product.featuredImage}
+                    alt={product.name}
+                    className="w-14 h-14 rounded object-cover border border-[#eeedf0] cursor-pointer"
                     onClick={() => {
                       onSelectProduct(product);
                       onClose();
                     }}
-                    className="flex items-center gap-3 cursor-pointer flex-1"
+                  />
+                  <div
+                    className="flex-1 min-w-0 cursor-pointer"
+                    onClick={() => {
+                      onSelectProduct(product);
+                      onClose();
+                    }}
                   >
-                    <img
-                      src={product.featuredImage}
-                      alt={product.name}
-                      className="w-14 h-14 rounded-lg object-cover bg-neutral-100"
-                    />
-                    <div>
-                      <p className="font-bold text-sm text-[#1a1c1e] hover:text-[#8E55FD] transition-colors line-clamp-1">
-                        {product.name}
-                      </p>
-                      <p className="text-xs text-[#7b7486]">{product.categoryName}</p>
-                      <span className="text-xs font-bold text-[#8E55FD]">
-                        {product.currency}{product.price}
-                      </span>
-                    </div>
+                    <h5 className="font-title-md text-sm font-semibold text-[#1a1c1e] hover:text-[#8E55FD] truncate">
+                      {product.name}
+                    </h5>
+                    <span className="text-xs text-[#7b7486]">{product.categoryName}</span>
+                    <span className="block font-title-md font-bold text-sm text-[#1a1c1e]">
+                      ${product.price}
+                    </span>
                   </div>
 
-                  <div className="flex items-center gap-2 pl-2">
-                    {product.affiliateLinks && product.affiliateLinks[0] && (
-                      <a
-                        href={product.affiliateLinks[0].url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="p-2 text-white bg-[#8E55FD] hover:bg-[#7b42ea] rounded-lg transition-colors"
-                        title="Buy"
-                      >
-                        <ExternalLink className="w-4 h-4" />
-                      </a>
-                    )}
+                  <div className="flex items-center gap-2">
+                    <button
+                      className="px-3 py-1.5 bg-[#8E55FD] text-white text-xs font-semibold rounded hover:bg-[#7232E7] transition-colors"
+                      onClick={() => {
+                        onSelectProduct(product);
+                        onClose();
+                      }}
+                    >
+                      Compare
+                    </button>
                     <button
                       onClick={() => onRemoveSaved(product.id)}
-                      className="p-2 text-[#7b7486] hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors cursor-pointer"
-                      title="Remove"
+                      className="p-1.5 text-[#7b7486] hover:text-red-600 rounded"
+                      title="Remove from saved"
                     >
-                      <Trash2 className="w-4 h-4" />
+                      <span className="material-symbols-outlined text-sm">delete</span>
                     </button>
                   </div>
                 </div>
@@ -122,19 +122,16 @@ export const AccountModal: React.FC<AccountModalProps> = ({
 
         {/* Footer */}
         {savedProducts.length > 0 && (
-          <div className="p-4 border-t border-[#ccc3d7]/40 bg-[#faf9fc] flex items-center justify-between">
+          <div className="p-4 bg-[#faf9fc] border-t border-[#eeedf0] flex justify-between items-center text-xs">
             <button
               onClick={onClearSaved}
-              className="text-xs text-[#7b7486] hover:text-red-500 transition-colors cursor-pointer"
+              className="text-[#7b7486] hover:text-red-600 transition-colors"
             >
-              Clear all saved items
+              Clear All Items
             </button>
-            <button
-              onClick={onClose}
-              className="px-4 py-2 bg-[#1a1c1e] hover:bg-[#333] text-white text-xs font-semibold rounded-lg transition-colors cursor-pointer"
-            >
-              Done
-            </button>
+            <span className="text-[#7b7486] font-label-mono">
+              Saved locally to your browser
+            </span>
           </div>
         )}
       </div>
