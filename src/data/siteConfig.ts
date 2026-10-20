@@ -9,6 +9,7 @@ export const SITE_CONFIG = {
   // Logos
   headerLogoUrl: '/white-logo.png',
   footerLogoUrl: '/black-logo.png',
+  faviconUrl: '/Travel%20Geared%20Favicon.png',
   
   // Hero & Backgrounds
   heroBgUrl: '/Home Main.png',
