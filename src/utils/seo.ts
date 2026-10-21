@@ -12,6 +12,7 @@ export const APPROVED_INDEXABLE_PATHS = [
   '/blog/7-best-portable-bluetooth-speakers-for-travel-2026',
   '/blog/best-travel-tips-for-2026',
   '/blog/forex-card-guide-2026',
+  '/blog/how-to-make-money-while-traveling-2026',
 ];
 
 export function isApprovedIndexablePath(pathname: string): boolean {

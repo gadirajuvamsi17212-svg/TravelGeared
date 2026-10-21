@@ -105,7 +105,7 @@ export const BlogPage: React.FC<BlogPageProps> = () => {
                 <img
                   src={featuredArticle.image}
                   alt={featuredArticle.title}
-                  className="w-full h-auto block select-none"
+                  className="w-full h-auto object-contain block select-none"
                   loading="eager"
                   decoding="async"
                 />
@@ -157,7 +157,7 @@ export const BlogPage: React.FC<BlogPageProps> = () => {
                 <img
                   src={article.image}
                   alt={article.title}
-                  className="w-full h-auto block select-none"
+                  className="w-full h-auto object-contain block select-none"
                   loading="lazy"
                   decoding="async"
                 />

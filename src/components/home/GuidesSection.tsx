@@ -30,19 +30,6 @@ export const GuidesSection: React.FC<GuidesSectionProps> = () => {
       {/* Articles Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
         {featuredArticles.map((article) => {
-          const isTargetCard =
-            article.slug === '7-best-portable-bluetooth-speakers-for-travel-2026' ||
-            article.id === 'art-best-bluetooth-speakers-travel-2026' ||
-            article.id === 'blog-best-bluetooth-speakers-travel-2026';
-
-          const isTravelTipsCard =
-            article.slug === 'best-travel-tips-for-2026' ||
-            article.id === 'art-best-travel-tips-2026' ||
-            article.id === 'blog-best-travel-tips-2026' ||
-            article.slug === 'forex-card-guide-2026' ||
-            article.id === 'art-forex-card-guide-2026' ||
-            article.id === 'blog-forex-card-guide-2026';
-
           return (
             <div
               key={article.id}
@@ -52,26 +39,12 @@ export const GuidesSection: React.FC<GuidesSectionProps> = () => {
                 navigate(`/blog/${article.slug || article.id}`);
               }}
             >
-              {/* Image Container - Dedicated and contains ONLY the image */}
-              <div
-                className={`overflow-hidden bg-[#e3e2e5] ${
-                  isTargetCard
-                    ? 'w-[330.24px] max-w-full h-[218px] mx-auto flex items-center justify-center md:w-full md:h-auto md:max-w-none md:block'
-                    : isTravelTipsCard
-                    ? 'w-full h-auto md:w-full md:h-auto md:max-w-none md:block'
-                    : 'w-full h-auto md:h-[296px]'
-                }`}
-              >
+              {/* Image Container - Dedicated and contains ONLY the image, preserving natural aspect ratio without cropping */}
+              <div className="w-full h-auto overflow-hidden bg-[#faf9fc]">
                 <img
                   src={article.image}
                   alt={article.title}
-                  className={`select-none block ${
-                    isTargetCard
-                      ? 'w-[333.24px] h-[222px] max-w-none object-contain md:w-full md:h-auto md:max-w-full md:object-contain'
-                      : isTravelTipsCard
-                      ? 'w-full h-auto object-contain md:w-full md:h-auto md:max-w-full md:object-contain'
-                      : 'w-full h-auto md:h-[296px] object-contain md:object-cover transition-transform duration-700 group-hover:scale-105'
-                  }`}
+                  className="w-full h-auto object-contain select-none block"
                   loading="eager"
                   decoding="async"
                   onError={(e) => {
@@ -86,11 +59,7 @@ export const GuidesSection: React.FC<GuidesSectionProps> = () => {
               </div>
 
               {/* Content Container - Completely below the image */}
-              <div
-                className={`p-6 flex-1 flex flex-col justify-between bg-white ${
-                  isTargetCard ? 'max-md:h-[240px] md:h-auto' : ''
-                }`}
-              >
+              <div className="p-6 flex-1 flex flex-col justify-between bg-white">
                 <div>
                   <div className="flex items-center justify-between gap-2 mb-3">
                     <span className="inline-block px-3 py-1 font-label-mono text-xs font-semibold rounded uppercase tracking-wider bg-[#f5effb] text-[#8E55FD]">

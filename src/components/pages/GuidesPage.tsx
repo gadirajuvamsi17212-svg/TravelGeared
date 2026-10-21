@@ -78,12 +78,12 @@ export const GuidesPage: React.FC<GuidesPageProps> = ({
               className="group bg-white rounded-xl border border-[#ccc3d7] overflow-hidden hover-lift hover:border-[#8E55FD] shadow-xs cursor-pointer flex flex-col justify-between"
               onClick={() => handleArticleClick(article)}
             >
-              {/* Image Container - Dedicated and contains ONLY the image */}
-              <div className="w-full h-auto md:h-56 lg:h-64 overflow-hidden bg-[#e3e2e5]">
+              {/* Image Container - Dedicated, auto-height, preserving natural aspect ratio without cropping */}
+              <div className="w-full h-auto overflow-hidden bg-[#faf9fc]">
                 <img
                   src={article.image}
                   alt={article.title}
-                  className="w-full h-auto md:h-full object-contain md:object-cover transition-transform duration-700 group-hover:scale-105 select-none block"
+                  className="w-full h-auto object-contain select-none block"
                   loading="lazy"
                   decoding="async"
                 />
