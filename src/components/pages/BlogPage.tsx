@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { BLOG_ARTICLES, BlogArticle } from '../../data/blogArticles';
 import { Article } from '../../types';
@@ -10,6 +10,35 @@ interface BlogPageProps {
 type FilterCategory = 'ALL' | 'TRAVEL TIPS' | 'PACKING' | 'TRAVEL TECH' | 'TRAVEL COMFORT';
 
 export const BlogPage: React.FC<BlogPageProps> = () => {
+  useEffect(() => {
+    let canonical = document.querySelector<HTMLLinkElement>(
+      'link[rel="canonical"]'
+    );
+
+    const createdCanonical = !canonical;
+    const previousHref = canonical?.getAttribute('href');
+
+    if (!canonical) {
+      canonical = document.createElement('link');
+      canonical.rel = 'canonical';
+      document.head.appendChild(canonical);
+    }
+
+    canonical.href = 'https://travelgeared.com/blog';
+
+    return () => {
+      if (createdCanonical) {
+        canonical?.remove();
+      } else if (
+        canonical &&
+        previousHref !== null &&
+        previousHref !== undefined
+      ) {
+        canonical.setAttribute('href', previousHref);
+      }
+    };
+  }, []);
+
   const [selectedCategory, setSelectedCategory] = useState<FilterCategory>('ALL');
   const [subscribed, setSubscribed] = useState(false);
   const [email, setEmail] = useState('');
