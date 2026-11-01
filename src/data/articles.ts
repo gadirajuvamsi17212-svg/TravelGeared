@@ -70,6 +70,8 @@ At 10.9 x 6.9 x 2 cm, it is the most compact model in the comparison. It carries
 
 **Best for**: frequent flyers and executives who want fast, cable-free, wireless charging in a pocket-size body.
 
+[BUY NOW](https://www.amazon.in/Xiaomi-10000mAh-Wireless-Alignment-Ultra-Compact/dp/B0HGL4WVT4/)
+
 ---
 
 #### 2. Xiaomi 5i 20000mAh 67W Fast Charging Power Bank – Rs 3,199
@@ -81,6 +83,8 @@ It offers three ports: a built-in Type-C cable, a second Type-C port and a USB-A
 Safety is strong, with 12 layers of protection and advanced temperature management. It is airline approved and comes in jet black and ice blue. The indicators show charging status, battery level and low-current mode. It measures 14 x 7.2 x 3.2 cm.
 
 **Best for**: digital nomads and professionals who need to charge multiple devices on one battery.
+
+[BUY NOW](https://www.amazon.in/Xiaomi-20000mAh-Charging-Protection-Supports/dp/B0H751H8RS/)
 
 ---
 
@@ -94,6 +98,8 @@ A smart LED indicator shows the battery level. The unit is BIS certified and pro
 
 **Best for**: budget-conscious users who want maximum capacity for the lowest price.
 
+[BUY NOW](https://www.amazon.in/Portronics-Powerbank-Indicator-Compatible-Smartphones/dp/B0D5V3VFDM/)
+
 ---
 
 #### 4. Portronics Power Shutter 20K 20000mAh Magnetic Power Bank – Rs 1,999
@@ -104,6 +110,8 @@ It offers multi-layer protection against overcurrent, overheating and overchargi
 
 **Best for**: content creators and style-conscious users who want a display, wireless charging and cables in one unit.
 
+[BUY NOW](https://www.amazon.in/Portronics-20000mAh-Magnetic-Powerbank-Bidirectional/dp/B0FS7VFR79/)
+
 ---
 
 #### 5. Portronics Revvo 10000mAh Magnetic Power Bank with Stand – Rs 1,399
@@ -111,6 +119,8 @@ It offers multi-layer protection against overcurrent, overheating and overchargi
 The Revvo is a slim, practical 10,000 mAh model with 15 W magnetic charging and a built-in mobile stand, useful for video calls and streaming while charging. It has a detachable Type-C to Type-C cable and dual Type-C ports, plus a metal ring in the box. Auto hibernation, advanced temperature control, short-circuit protection and overcharge protection are included, and it is flight approved. It measures 12.7 x 9.6 x 2.3 cm and comes in Mocha and Black.
 
 **Best for**: commuters and students who want a stand and magnetic charging at a low price.
+
+[BUY NOW](https://www.amazon.in/Portronics-Wireless-Powerbank-10000mAh-Detachable/dp/B0G15M9VM5/)
 
 ---
 
@@ -121,6 +131,8 @@ The Revvo is a slim, practical 10,000 mAh model with 15 W magnetic charging and 
 The boAt Apex PB332 combines 25 W wired and 15 W wireless charging in a soft-touch body. Its foldable stand holds a phone in portrait or landscape mode, and a free MagnaCharge ring is included. It has a two-way Type-C port and a USB-A port, supports simultaneous charge and discharge, and works with both Android and iOS. Temperature and short-circuit protection are built in. It comes in blue, black and white.
 
 **Best for**: users who want a stand and wireless charging with wide device compatibility.
+
+[BUY NOW](https://www.amazon.in/boAt-Magnacharge-Wireless-Charging-Powerbank/dp/B0HDCNBKW1)
 
 ![Portable Power Bank with Stand for Outdoor Travel and Scenic Journeys](/Blog%20images/power%20bank%20inner%202.png)
 
