@@ -3,6 +3,218 @@ import { calculateReadingTime } from '../utils/readingTime';
 
 const RAW_ARTICLES: Omit<Article, 'readTime'>[] = [
   {
+    id: 'art-best-power-banks-in-india-travel',
+    title: 'Best Power Banks in India for Travel: Top 10000mAh and 20000mAh Fast Charging Picks',
+    slug: 'best-power-banks-in-india-for-travel',
+    tag: 'Travel Tech',
+    category: 'Guide',
+    excerpt: 'Indian domestic airlines carried 166.9 million passengers in 2025, according to DGCA data, and each of them relied on a phone for e-tickets, boarding passes, maps and UPI payments. We compared six of the best power banks in India from Xiaomi, Portronics and boAt, with prices in rupees as listed on Amazon India.',
+    image: '/Blog Banner Images/Best Power Banks for Travel.png',
+    publishDate: 'Nov 01, 2026',
+    author: {
+      name: 'Vamsi Mohan',
+      role: 'Content Writer',
+    },
+    featuredProducts: ['prod-gan-charger', 'prod-sonic-anc'],
+    tags: ['Travel Tech', 'India', 'Power Banks', 'DGCA', 'Fast Charging', 'Xiaomi', 'Portronics', 'boAt'],
+    content: `
+### Why You Need a Power Bank in India: Travel, Remote Work and Business
+
+Indian domestic airlines carried 166.9 million passengers in 2025, according to DGCA data, and each of them relied on a phone for e-tickets, boarding passes, maps and UPI payments. For travellers, a dead phone means no navigation or ticket. For digital nomads working from cafés and co-working spaces, it means a dropped client call. For business professionals, it means being unreachable between meetings, lounges and long commutes.
+
+The right power bank depends on how you travel. A 10000mAh power bank suits a day of city exploring. A 20000mAh power bank with fast charging keeps a phone, earbuds and a tablet alive across a long journey. Magnetic wireless charging, built-in cables and flight approval now matter as much as raw capacity. In India, a power bank must also carry BIS registration, and it must follow DGCA flight rules, covered below.
+
+We compared six of the best power banks in India from Xiaomi, Portronics and boAt, with prices in rupees as listed on Amazon India. The list covers 10000mAh power banks, 20000mAh power banks, fast charging power banks and magnetic wireless power banks. Xiaomi's two models come first.
+
+![Multi-Device Fast Charging Setup for Digital Nomads and Travel](/Blog%20images/power%20bank%20inner%201.png)
+
+---
+
+### Power Bank Rules in India: DGCA and BIS at a Glance
+
+Power banks are allowed in cabin baggage only, up to 100 Wh, and cannot be used during a flight. On 11 October 2026, a power bank in an overhead bin caused a fire on IndiGo flight 6E 6115 from Delhi to Chennai, which was diverted to Hyderabad. Airlines now stress the rules below.
+
+| Rule | What applies in India |
+| :--- | :--- |
+| **Where to carry** | Cabin baggage only, never checked luggage |
+| **Capacity limit** | Up to 100 Wh (about 27,000 mAh) allowed; 100–160 Wh needs airline approval; above 160 Wh banned |
+| **Number allowed** | Air India caps passengers at 2 power banks |
+| **In-flight use** | Banned since January 2026: no charging devices from a power bank, no charging the bank from seat USB |
+| **Where to keep it** | Seat pocket, under the seat or on your person, not the overhead bin |
+| **Safety certification** | BIS registration (IS 13252 Part 1) is mandatory for power banks sold in India |
+
+---
+
+### Quick Comparison: Best Power Banks in India by Price and Specs
+
+| Model | Capacity | Max Output | Ports | Price (Rs) |
+| :--- | :--- | :--- | :--- | :--- |
+| **Xiaomi Qi 2.2** | 10,000 mAh | 45 W wired / 25 W wireless | 3 | 3,699 |
+| **Xiaomi 5i** | 20,000 mAh | 67 W | 3 | 3,199 |
+| **Portronics Luxcell Bind 20k** | 20,000 mAh | 22.5 W | 2 | 1,330 |
+| **Portronics Power Shutter 20K** | 20,000 mAh | 15 W wireless | Type-C + 8-pin cables | 1,999 |
+| **Portronics Revvo** | 10,000 mAh | 15 W | 2 | 1,399 |
+| **boAt Apex PB332** | 10,000 mAh | 25 W wired / 15 W wireless | 2 | 1,699 |
+
+---
+
+### Best Xiaomi Power Banks in India
+
+#### 1. Xiaomi Qi 2.2 10000mAh Magnetic Wireless Power Bank – Rs 3,699
+
+The Xiaomi Qi 2.2 is the premium choice in this group and the best option for travellers who want one compact device to replace a bag full of cables. It pairs a 45 W wired output with 25 W wireless charging, which is high for a 10,000 mAh unit. It can also charge wirelessly and over a wire at the same time, so a phone and a pair of earbuds can top up together.
+
+It has three ports: a built-in USB-C cable and two Type-C ports, so you do not need to carry a separate cable. A 13 N magnetic attachment holds the phone firmly in place, which is useful on a train seat or a hotel desk. A loop strap lets you clip it to a bag.
+
+At 10.9 x 6.9 x 2 cm, it is the most compact model in the comparison. It carries 16 safety features with advanced battery management and is safe for air travel. It is available in white and black, and an LED indicator shows the remaining charge.
+
+**Best for**: frequent flyers and executives who want fast, cable-free, wireless charging in a pocket-size body.
+
+---
+
+#### 2. Xiaomi 5i 20000mAh 67W Fast Charging Power Bank – Rs 3,199
+
+The Xiaomi 5i is a new launch and the highest-output power bank in this comparison. Its 67 W output can power more than a phone. Combined with a 20,000 mAh battery, it suits long trips, remote work sessions and multi-device households.
+
+It offers three ports: a built-in Type-C cable, a second Type-C port and a USB-A port. This covers modern devices and older accessories alike. Universal fast charging, dynamic power adjustment and wide device compatibility mean it adapts to what is plugged in. A Low Power Mode gives gentle, safe charging for earbuds, smartwatches and fitness bands.
+
+Safety is strong, with 12 layers of protection and advanced temperature management. It is airline approved and comes in jet black and ice blue. The indicators show charging status, battery level and low-current mode. It measures 14 x 7.2 x 3.2 cm.
+
+**Best for**: digital nomads and professionals who need to charge multiple devices on one battery.
+
+---
+
+### Best Portronics Power Banks in India
+
+#### 3. Portronics Luxcell Bind 20k 20000mAh Power Bank – Rs 1,330
+
+The Luxcell Bind 20k is the value leader of the group. For Rs 1,330 you get a 20,000 mAh battery, 22.5 W fast charging and the ability to charge three devices at once. It has two ports plus built-in cables: a Type-C PD port (input and output), an 8-pin output cable and a USB-A output port.
+
+A smart LED indicator shows the battery level. The unit is BIS certified and protected against overcurrent, short circuit, overvoltage and overload. It measures 14 x 9 x 2 cm and is available in black.
+
+**Best for**: budget-conscious users who want maximum capacity for the lowest price.
+
+---
+
+#### 4. Portronics Power Shutter 20K 20000mAh Magnetic Power Bank – Rs 1,999
+
+Styled like a camera, the Power Shutter 20K is the most design-led model here. Its 15 W magnetic wireless charging and strong magnetic suction hold a phone securely, and a metal ring is included for phones that are not magnetic. It comes with two fast-charging cables (Type-C and 8-pin), a bidirectional Type-C port and an LED digital display that shows exact battery percentage.
+
+It offers multi-layer protection against overcurrent, overheating and overcharging. It measures 14 x 10.8 x 3.8 cm and comes in white, black and orange.
+
+**Best for**: content creators and style-conscious users who want a display, wireless charging and cables in one unit.
+
+---
+
+#### 5. Portronics Revvo 10000mAh Magnetic Power Bank with Stand – Rs 1,399
+
+The Revvo is a slim, practical 10,000 mAh model with 15 W magnetic charging and a built-in mobile stand, useful for video calls and streaming while charging. It has a detachable Type-C to Type-C cable and dual Type-C ports, plus a metal ring in the box. Auto hibernation, advanced temperature control, short-circuit protection and overcharge protection are included, and it is flight approved. It measures 12.7 x 9.6 x 2.3 cm and comes in Mocha and Black.
+
+**Best for**: commuters and students who want a stand and magnetic charging at a low price.
+
+---
+
+### boAt Wireless Power Bank in India
+
+#### 6. boAt Apex PB332 10000mAh Wireless Power Bank with Stand – Rs 1,699
+
+The boAt Apex PB332 combines 25 W wired and 15 W wireless charging in a soft-touch body. Its foldable stand holds a phone in portrait or landscape mode, and a free MagnaCharge ring is included. It has a two-way Type-C port and a USB-A port, supports simultaneous charge and discharge, and works with both Android and iOS. Temperature and short-circuit protection are built in. It comes in blue, black and white.
+
+**Best for**: users who want a stand and wireless charging with wide device compatibility.
+
+![Portable Power Bank with Stand for Outdoor Travel and Scenic Journeys](/Blog%20images/power%20bank%20inner%202.png)
+
+---
+
+### Specification Comparison: 10000mAh vs 20000mAh Power Banks
+
+| Model | Dimensions (cm) | Wireless | Built-in Cable | Colours |
+| :--- | :--- | :--- | :--- | :--- |
+| **Xiaomi Qi 2.2** | 10.9 x 6.9 x 2 | 25 W, 13 N magnet | Yes (USB-C) | White, Black |
+| **Xiaomi 5i** | 14 x 7.2 x 3.2 | No | Yes (Type-C) | Jet Black, Ice Blue |
+| **Luxcell Bind 20k** | 14 x 9 x 2 | No | Yes (Type-C, 8-pin) | Black |
+| **Power Shutter 20K** | 14 x 10.8 x 3.8 | 15 W magnetic | Yes (Type-C, 8-pin) | White, Black, Orange |
+| **Revvo** | 12.7 x 9.6 x 2.3 | 15 W magnetic | Yes (Type-C, detachable) | Mocha, Black |
+| **boAt Apex PB332** | 11 x 7.3 x 1.8 | 15 W magnetic | No | Blue, Black, White |
+
+---
+
+### Power Bank Price Comparison in India: Value per mAh
+
+Capacity and price together show the value of each model. The table below compares price per 1,000 mAh, calculated directly from the listed prices and capacities.
+
+| Model | Capacity (mAh) | Price (Rs) | Price per 1,000 mAh (Rs) |
+| :--- | :--- | :--- | :--- |
+| **Portronics Luxcell Bind 20k** | 20,000 | 1,330 | 66.5 |
+| **Portronics Power Shutter 20K** | 20,000 | 1,999 | 100.0 |
+| **Portronics Revvo** | 10,000 | 1,399 | 139.9 |
+| **Xiaomi 5i** | 20,000 | 3,199 | 160.0 |
+| **boAt Apex PB332** | 10,000 | 1,699 | 169.9 |
+| **Xiaomi Qi 2.2** | 10,000 | 3,699 | 369.9 |
+
+The Luxcell Bind 20k is clearly the cheapest per unit of capacity. The Xiaomi 5i costs more per mAh, but its 67 W output is almost three times the Luxcell's 22.5 W. The Xiaomi Qi 2.2 has the highest price per mAh, which reflects its 45 W wired and 25 W wireless speed in the smallest body.
+
+On flight limits, DGCA allows up to 100 Wh. The standard formula is mAh x V ÷ 1,000, and with 3.7 V cells a 20,000 mAh power bank works out to 74 Wh, while a 30,000 mAh bank reaches 111 Wh and needs airline approval. Every model in this list is 20,000 mAh or smaller.
+
+---
+
+### Which Is the Best Power Bank to Buy in India?
+
+| If you are... | Choose | Why |
+| :--- | :--- | :--- |
+| **A frequent flyer or executive** | Xiaomi Qi 2.2 | Smallest body, 25 W wireless, built-in cable |
+| **A digital nomad or power user** | Xiaomi 5i | 67 W output, 20,000 mAh, three ports |
+| **On a tight budget** | Portronics Luxcell Bind 20k | Lowest price per mAh, 3 devices at once |
+| **A content creator** | Portronics Power Shutter 20K | Display, wireless charging, two cables |
+| **A commuter** | Portronics Revvo | Stand, magnetic charging, low price |
+| **An iPhone or Android user wanting a stand** | boAt Apex PB332 | Foldable stand, 25 W wired |
+
+---
+
+### Power Bank FAQs for Indian Travellers
+
+#### Can I carry a 20000mAh power bank on a flight in India?
+
+Yes. Keep it in cabin baggage, within the 100 Wh limit (a 20,000 mAh bank is about 74 Wh), and do not use it during the flight.
+
+#### Is BIS certification mandatory for power banks in India?
+
+Yes. Power banks sold in India must be registered with BIS under the Compulsory Registration Scheme, standard IS 13252 Part 1.
+
+#### Which is the best power bank under Rs 2,000?
+
+Four models in this list are priced under Rs 2,000: the Portronics Luxcell Bind 20k (Rs 1,330), Portronics Revvo (Rs 1,399), boAt Apex PB332 (Rs 1,699) and Portronics Power Shutter 20K (Rs 1,999). The Luxcell has the most capacity for the lowest price.
+
+#### Which is the best 20000mAh power bank in India?
+
+Three 20,000 mAh models are listed: the Xiaomi 5i for the highest output (67 W), the Portronics Luxcell Bind 20k for the lowest price (Rs 1,330) and the Portronics Power Shutter 20K for magnetic wireless charging (15 W).
+
+#### Which is the best magnetic wireless power bank in India?
+
+The Xiaomi Qi 2.2 has the fastest wireless output at 25 W with a 13 N magnet. The boAt Apex PB332 (15 W), Portronics Revvo (15 W) and Portronics Power Shutter 20K (15 W) are cheaper alternatives.
+
+---
+
+### Final Verdict
+
+Xiaomi leads this comparison on performance. The Xiaomi 5i is the best all-round choice for long trips and heavy use, while the Xiaomi Qi 2.2 is the best pocket-size premium option. Portronics wins on value, with the Luxcell Bind 20k offering the most capacity per rupee. The boAt Apex PB332 is a solid, stand-equipped alternative.
+
+Whichever you choose, check that it is airline approved, carries recognised safety certification and matches your devices' charging speeds. A power bank is a small purchase that protects every other piece of travel technology you carry.
+
+Prices are as listed on Amazon India at the time of writing and may change.
+
+---
+
+### Sources
+
+Checked on 1 November 2026.
+- Akasa Air: new rules about power banks on flights
+- Esquire India: power bank rules for flights in India
+- PTI via The Week: domestic air traffic 16.69 crore in 2025
+- BIS registration for power banks, IS 13252 Part 1
+    `,
+  },
+  {
     id: 'art-how-to-make-money-while-traveling-2026',
     title: 'How to Make Money While Traveling in 2026: 10 Practical Ways to Fund Your Adventures',
     slug: 'how-to-make-money-while-traveling-2026',

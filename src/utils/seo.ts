@@ -13,6 +13,7 @@ export const APPROVED_INDEXABLE_PATHS = [
   '/blog/best-travel-tips-for-2026',
   '/blog/forex-card-guide-2026',
   '/blog/how-to-make-money-while-traveling-2026',
+  '/blog/best-power-banks-in-india-for-travel',
 ];
 
 export function isApprovedIndexablePath(pathname: string): boolean {

@@ -22,6 +22,7 @@ export const publishedBlogSlugs: string[] = [
   'best-travel-tips-for-2026',
   'forex-card-guide-2026',
   'how-to-make-money-while-traveling-2026',
+  'best-power-banks-in-india-for-travel',
 ];
 
 interface SitemapEntry {
